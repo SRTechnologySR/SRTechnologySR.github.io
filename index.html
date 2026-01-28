@@ -6,35 +6,173 @@
 <title>TechnologySR</title>
 
 <style>
+:root{
+    --primary:#2563eb;
+    --text:#0f172a;
+    --muted:#475569;
+    --bg:#f8fafc;
+    --card:#ffffff;
+}
 *{
     box-sizing:border-box;
 }
 body{
     margin:0;
-    min-height:100vh;
+    font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+header{
+    background:#ffffff;
+    border-bottom:1px solid #e5e7eb;
+}
+.nav{
+    max-width:1100px;
+    margin:auto;
+    padding:18px 20px;
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    justify-content:center;
-    background:#0b0f1a;
-    font-family:Segoe UI, Arial, sans-serif;
-    color:white;
 }
-
+.brand{
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:0.5px;
+}
+.hero{
+    max-width:1100px;
+    margin:auto;
+    padding:90px 20px 70px;
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:50px;
+}
+.hero h1{
+    font-size:48px;
+    line-height:1.15;
+    margin:0 0 20px;
+}
+.hero p{
+    font-size:18px;
+    color:var(--muted);
+    line-height:1.7;
+}
+.buttons{
+    margin-top:35px;
+    display:flex;
+    gap:20px;
+}
+.btn{
+    padding:14px 28px;
+    border-radius:6px;
+    font-weight:600;
+    text-decoration:none;
+    font-size:15px;
+}
+.primary{
+    background:var(--primary);
+    color:#fff;
+}
+.secondary{
+    border:1px solid #cbd5f5;
+    color:var(--primary);
+}
 .card{
-    width:90%;
-    max-width:950px;
-    background:linear-gradient(145deg,#12182b,#0b0f1a);
-    border-radius:20px;
-    padding:50px;
-    box-shadow:0 0 40px rgba(0,234,255,0.15);
+    background:var(--card);
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:30px;
 }
+.card h3{
+    margin-top:0;
+}
+.features{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+footer{
+    border-top:1px solid #e5e7eb;
+    padding:30px 20px;
+    text-align:center;
+    font-size:14px;
+    color:#64748b;
+}
+@media(max-width:900px){
+    .hero{
+        grid-template-columns:1fr;
+        padding-top:60px;
+    }
+    .features{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
 
-.badge{
-    display:inline-block;
-    padding:6px 16px;
-    border-radius:20px;
-    background:rgba(0,234,255,0.15);
-    color:#00eaff;
+<body>
+
+<header>
+    <div class="nav">
+        <div class="brand">TechnologySR</div>
+        <div class="brand" style="font-size:14px;color:#64748b;">
+            @SRTechnologySR
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div>
+        <h1>Technology, IPTV & Digital Media Solutions</h1>
+        <p>
+            TechnologySR is a professional platform focused on
+            technology insights, IPTV information, and modern digital entertainment.
+            The aim is to deliver structured, reliable, and easy-to-understand content.
+        </p>
+
+        <div class="buttons">
+            <a class="btn primary" href="https://youtube.com/@SRTechnologySR" target="_blank">
+                YouTube Channel
+            </a>
+            <a class="btn secondary" href="#">
+                Learn More
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>What TechnologySR Offers</h3>
+        <p>
+            Clear explanations, updated information, and practical guidance
+            for users interested in digital technology and entertainment platforms.
+        </p>
+    </div>
+</section>
+
+<section class="features">
+    <div class="card">
+        <h3>Technology</h3>
+        <p>Updates and insights about modern digital tools and platforms.</p>
+    </div>
+    <div class="card">
+        <h3>IPTV</h3>
+        <p>Information and guidance related to IPTV and streaming technologies.</p>
+    </div>
+    <div class="card">
+        <h3>Digital Media</h3>
+        <p>Understanding entertainment platforms and evolving digital trends.</p>
+    </div>
+</section>
+
+<footer>
+    Built with GitHub Pages • TechnologySR
+</footer>
+
+</body>
+</html>    color:#00eaff;
     font-size:14px;
     margin-bottom:20px;
 }
