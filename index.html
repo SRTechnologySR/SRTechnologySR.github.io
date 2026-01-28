@@ -1,40 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TechnologySR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechnologySR</title>
 
-<style>
-:root{
-    --primary:#2563eb;
-    --text:#0f172a;
-    --muted:#475569;
-    --bg:#f8fafc;
-    --card:#ffffff;
-}
-*{box-sizing:border-box;}
-body{
-    margin:0;
-    font-family:Inter, Arial, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-}
-header{
-    background:#fff;
-    border-bottom:1px solid #e5e7eb;
-}
-.nav{
-    max-width:1100px;
-    margin:auto;
-    padding:18px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-.hero{
-    max-width:1100px;
-    margin:auto;
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #020024, #090979, #00eaff);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .container {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            font-size: 46px;
+            margin: 10px 0;
+        }
+
+        .tagline {
+            font-size: 20px;
+            color: #cfd8ff;
+            margin-bottom: 30px;
+        }
+
+        .line {
+            height: 2px;
+            width: 80px;
+            background: #00eaff;
+            margin: 25px auto;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #d7dbff;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .actions {
+            margin-top: 35px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #00eaff;
+            color: #000;
+        }
+
+        .primary:hover {
+            box-shadow: 0 0 20px #00eaff;
+        }
+
+        .secondary {
+            border: 2px solid #00eaff;
+            color: #00eaff;
+        }
+
+        .secondary:hover {
+            background: #00eaff;
+            color: #000;
+        }
+
+        .cards {
+            margin-top: 70px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            margin-top: 80px;
+            font-size: 14px;
+            color: #cfd8ff;
+            padding-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 36px;
+            }
+            .card {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>TechnologySR</h1>
+    <div class="tagline">Technology • IPTV • Digital Media</div>
+    <div class="line"></div>
+
+    <p>
+        TechnologySR is a professional platform focused on modern technology,
+        IPTV information, and digital media tools. Clean, fast, and built for learning.
+    </p>
+
+    <div class="actions">
+        <a href="explore.html" class="btn primary">Explore More</a>
+        <a href="https://youtube.com/@SRTechnologySR" class="btn secondary" target="_blank">YouTube Channel</a>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h2>IPTV</h2>
+            <p>Information and guidance related to IPTV and streaming technologies.</p>
+        </div>
+
+        <div class="card">
+            <h2>Digital Media</h2>
+            <p>Understanding entertainment platforms and evolving digital trends.</p>
+        </div>
+
+        <div class="card">
+            <h2>Tools</h2>
+            <p>Simple web-based utilities including playlist and IPTV tools.</p>
+        </div>
+    </div>
+
+    <footer>
+        Built with GitHub Pages • TechnologySR
+    </footer>
+</div>
+
+</body>
+</html>    margin:auto;
     padding:90px 20px 70px;
     display:grid;
     grid-template-columns:1.2fr 1fr;
