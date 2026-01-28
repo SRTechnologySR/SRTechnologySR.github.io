@@ -17,14 +17,6 @@ body{
     margin:auto;
     padding:60px 20px;
 }
-h1{
-    font-size:36px;
-    margin-bottom:10px;
-}
-p{
-    color:#475569;
-    margin-bottom:40px;
-}
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -35,6 +27,61 @@ p{
     border:1px solid #e5e7eb;
     border-radius:12px;
     padding:25px;
+}
+.card h3{margin-top:0;}
+.btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 20px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:600;
+    background:#2563eb;
+    color:#fff;
+}
+.back{
+    margin-top:40px;
+    display:inline-block;
+    color:#2563eb;
+    font-weight:600;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Explore Tools</h1>
+    <p>Select a section below.</p>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>M3U Generator (Xtream)</h3>
+            <p>Generate M3U playlist URLs from Xtream portal details.</p>
+            <a class="btn" href="m3u-generator-xtream.html">
+                Open Tool
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>IPTV Guides</h3>
+            <p>Educational content related to IPTV technology.</p>
+            <a class="btn" href="#">Coming Soon</a>
+        </div>
+
+        <div class="card">
+            <h3>Tech Resources</h3>
+            <p>Useful digital tools and explanations.</p>
+            <a class="btn" href="#">Coming Soon</a>
+        </div>
+
+    </div>
+
+    <a class="back" href="index.html">← Back to Home</a>
+</div>
+</body>
+</html>    padding:25px;
 }
 .card h3{
     margin-top:0;
