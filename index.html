@@ -3,76 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TechnologySR | Official Website</title>
+<title>TechnologySR</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
 body{
     margin:0;
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0b0f1a;
+    font-family:Segoe UI, Arial, sans-serif;
     color:white;
-    text-align:center;
 }
-.container{
-    padding:60px 20px;
-    max-width:900px;
-    margin:auto;
+
+.card{
+    width:90%;
+    max-width:950px;
+    background:linear-gradient(145deg,#12182b,#0b0f1a);
+    border-radius:20px;
+    padding:50px;
+    box-shadow:0 0 40px rgba(0,234,255,0.15);
 }
-h1{
-    font-size:42px;
-    margin-bottom:10px;
-}
-h2{
+
+.badge{
+    display:inline-block;
+    padding:6px 16px;
+    border-radius:20px;
+    background:rgba(0,234,255,0.15);
     color:#00eaff;
-    font-weight:normal;
+    font-size:14px;
     margin-bottom:20px;
 }
-.username{
-    color:#ffd700;
-    font-size:18px;
+
+h1{
+    font-size:46px;
+    margin:10px 0;
+}
+
+.tagline{
+    font-size:20px;
+    color:#cfd8ff;
     margin-bottom:30px;
 }
-p{
-    font-size:18px;
-    line-height:1.7;
-    color:#e0e0e0;
-}
-.btn{
-    display:inline-block;
-    margin-top:30px;
-    padding:14px 32px;
+
+.line{
+    height:2px;
+    width:80px;
     background:#00eaff;
-    color:black;
-    text-decoration:none;
-    border-radius:30px;
-    font-weight:bold;
+    margin:25px 0;
 }
-.btn:hover{
-    background:white;
+
+p{
+    font-size:17px;
+    line-height:1.8;
+    color:#d7dbff;
+    max-width:700px;
+}
+
+.actions{
+    margin-top:35px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:14px 30px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.primary{
+    background:#00eaff;
+    color:#000;
+}
+
+.primary:hover{
+    box-shadow:0 0 20px #00eaff;
+}
+
+.secondary{
+    border:2px solid #00eaff;
+    color:#00eaff;
+}
+
+.secondary:hover{
+    background:#00eaff;
+    color:#000;
+}
+
+@media(max-width:600px){
+    h1{font-size:36px;}
+    .card{padding:35px;}
 }
 </style>
 </head>
 
 <body>
-<div class="container">
-    <h1>Welcome to TechnologySR 🚀</h1>
-    <h2>Technology • IPTV • Digital Entertainment</h2>
-    <div class="username">@TechnologySR</div>
+
+<div class="card">
+    <div class="badge">@SRTechnologySR</div>
+
+    <h1>TechnologySR</h1>
+    <div class="tagline">Technology • IPTV • Digital Entertainment</div>
+
+    <div class="line"></div>
 
     <p>
-        TechnologySR is a digital platform focused on technology,
-        IPTV solutions, and modern entertainment.
-        The goal is to share clear, useful, and reliable information.
+        TechnologySR is a modern digital platform focused on sharing
+        technology knowledge, IPTV insights, and entertainment-related content.
+        The goal is to keep things simple, clear, and useful for everyone.
     </p>
 
     <p>
-        Stay connected for updates, guides, and resources
-        related to today’s digital world.
+        This space connects people with guides, updates, and resources
+        designed for today’s digital lifestyle.
     </p>
 
-    <a class="btn" href="https://youtube.com/@TechnologySR" target="_blank">
-        Subscribe on YouTube
-    </a>
+    <div class="actions">
+        <a class="btn primary" href="https://youtube.com/@SRTechnologySR" target="_blank">
+            YouTube Channel
+        </a>
+        <a class="btn secondary" href="#" onclick="alert('More links coming soon!')">
+            Explore More
+        </a>
+    </div>
 </div>
+
 </body>
 </html>
