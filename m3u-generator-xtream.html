@@ -1,115 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xtream M3U Generator • TechnologySR</title>
-
-<style>
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#0b1020;
-  color:#ffffff;
-}
-
-.container{
-  max-width:800px;
-  margin:auto;
-  padding:60px 20px;
-  text-align:center;
-}
-
-h1{
-  margin-bottom:10px;
-}
-
-.subtitle{
-  color:#9fb3ff;
-  margin-bottom:40px;
-}
-
-.card{
-  background:#141a33;
-  padding:35px;
-  border-radius:20px;
-}
-
-input{
-  width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:8px;
-  border:none;
-  font-size:15px;
-}
-
-button{
-  margin-top:20px;
-  padding:14px 36px;
-  border:none;
-  border-radius:30px;
-  background:#00eaff;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-button:hover{
-  box-shadow:0 0 15px #00eaff;
-}
-
-textarea{
-  width:100%;
-  height:120px;
-  margin-top:20px;
-  border-radius:8px;
-  padding:10px;
-  font-size:14px;
-}
-
-.back{
-  display:inline-block;
-  margin-top:40px;
-  color:#9fb3ff;
-  text-decoration:none;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-  <h1>M3U Playlist Generator</h1>
-  <div class="subtitle">Generate M3U from Xtream Portal</div>
-
-  <div class="card">
-    <input id="server" placeholder="Server URL (http://example.com:8080)">
-    <input id="username" placeholder="Username">
-    <input id="password" placeholder="Password">
-
-    <button onclick="generateM3U()">Generate M3U</button>
-
-    <textarea id="result" placeholder="Your M3U link will appear here"></textarea>
-  </div>
-
-  <a href="explore.html" class="back">← Back to Explore</a>
-</div>
-
 <script>
 function generateM3U(){
-  var s = document.getElementById("server").value.trim();
-  var u = document.getElementById("username").value.trim();
-  var p = document.getElementById("password").value.trim();
+  let s = document.getElementById("server").value.trim();
+  let u = document.getElementById("username").value.trim();
+  let p = document.getElementById("password").value.trim();
 
   if(!s || !u || !p){
     alert("Please fill all fields");
     return;
   }
 
-  document.getElementById("result").value =
-    s + "/get.php?username=" + u + "&password=" + p + "&type=m3u_plus";
+  if(!s.startsWith("http://") && !s.startsWith("https://")){
+    s = "http://" + s;
+  }
+
+  if(s.endsWith("/")){
+    s = s.slice(0, -1);
+  }
+
+  const link = s + "/get.php?username=" + u + "&password=" + p + "&type=m3u_plus";
+  document.getElementById("result").value = link;
+}
+
+function copyM3U(){
+  const text = document.getElementById("result");
+  if(!text.value){
+    alert("Generate M3U first");
+    return;
+  }
+  text.select();
+  document.execCommand("copy");
+  alert("M3U link copied!");
+}
+
+function downloadM3U(){
+  const data = document.getElementById("result").value;
+  if(!data){
+    alert("Generate M3U first");
+    return;
+  }
+
+  const blob = new Blob([data], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "playlist.m3u";
+  a.click();
+
+  URL.revokeObjectURL(url);
 }
 </script>
-
-</body>
-</html>
