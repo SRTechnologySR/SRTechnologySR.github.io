@@ -1,37 +1,41 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TechnologySR</title>
+<title>TechnologySR • IPTV Tools</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:#0b1020;
-  color:#fff;
-  text-align:center;
+  background:linear-gradient(135deg,#0b1020,#0f1735);
+  color:#ffffff;
 }
+
 .container{
   max-width:1100px;
   margin:auto;
-  padding:60px 20px;
+  padding:70px 20px;
+  text-align:center;
 }
-h1{
-  font-size:42px;
+
+/* HERO */
+.hero h1{
+  font-size:44px;
   margin-bottom:10px;
 }
-.tagline{
+.hero p{
   color:#9fb3ff;
   font-size:18px;
-  margin-bottom:30px;
+  max-width:700px;
+  margin:0 auto 35px;
 }
-.btn{
+.hero a{
   display:inline-block;
   margin:10px;
-  padding:12px 28px;
-  border-radius:25px;
+  padding:14px 34px;
+  border-radius:30px;
   text-decoration:none;
   font-weight:bold;
 }
@@ -43,49 +47,111 @@ h1{
   border:2px solid #00eaff;
   color:#00eaff;
 }
-.cards{
-  margin-top:50px;
+
+/* FEATURES */
+.features{
+  margin-top:80px;
   display:grid;
-  gap:20px;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
 }
-.card{
+.feature{
   background:#141a33;
-  padding:30px;
-  border-radius:18px;
+  padding:35px;
+  border-radius:22px;
+  text-align:left;
 }
-footer{
-  margin-top:60px;
+.feature h2{
+  margin-top:0;
+}
+.feature p{
+  color:#b8c6ff;
+  font-size:15px;
+}
+
+/* SECTION */
+.section{
+  margin-top:90px;
+}
+.section h2{
+  font-size:30px;
+  margin-bottom:15px;
+}
+.section p{
+  color:#9fb3ff;
+  max-width:800px;
+  margin:auto;
+  font-size:16px;
+}
+
+/* FOOT NOTE */
+.note{
+  margin-top:80px;
   font-size:14px;
   color:#9fb3ff;
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="container">
-  <h1>TechnologySR</h1>
-  <div class="tagline">Technology • IPTV • Digital Media</div>
 
-  <a href="explore.html" class="btn primary">Explore More</a>
-  <a href="https://youtube.com/@SRTechnologySR" target="_blank" class="btn secondary">YouTube</a>
+  <!-- HERO -->
+  <div class="hero">
+    <h1>TechnologySR</h1>
+    <p>
+      Simple, clean and useful IPTV & M3U tools designed to help users
+      understand and manage playlist formats easily.
+    </p>
 
-  <div class="cards">
-    <div class="card">
-      <h2>IPTV</h2>
-      <p>Information and guidance related to IPTV and streaming technologies.</p>
+    <a href="explore.html" class="primary">Explore Tools</a>
+    <a href="https://youtube.com/@SRTechnologySR" target="_blank" class="secondary">
+      YouTube Channel
+    </a>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="feature">
+      <h2>Xtream ➜ M3U</h2>
+      <p>
+        Convert Xtream Portal details into a ready-to-use M3U playlist
+        link compatible with popular IPTV players.
+      </p>
     </div>
 
-    <div class="card">
-      <h2>Digital Media</h2>
-      <p>Understanding entertainment platforms and evolving digital trends.</p>
+    <div class="feature">
+      <h2>M3U ➜ Xtream</h2>
+      <p>
+        Extract Xtream server URL, username and password directly from
+        an existing M3U playlist link.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h2>Beginner Friendly</h2>
+      <p>
+        Clean interface, no ads, no distractions. Designed for easy
+        understanding and practical usage.
+      </p>
     </div>
   </div>
 
-  <footer>
-    Built with GitHub Pages • TechnologySR
-  </footer>
+  <!-- INFO SECTION -->
+  <div class="section">
+    <h2>Why TechnologySR?</h2>
+    <p>
+      This website focuses on utility-based tools rather than heavy
+      design or unnecessary features. Everything works directly in
+      your browser and is optimized for GitHub Pages.
+    </p>
+  </div>
+
+  <div class="note">
+    This site does not host any playlists or content.
+  </div>
+
 </div>
 
 </body>
