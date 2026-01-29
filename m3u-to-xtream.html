@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M3U ➜ Xtream Converter • TechnologySR</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#0b1020;
+  color:#ffffff;
+}
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:60px 20px;
+  text-align:center;
+}
+h1{margin-bottom:10px;}
+.subtitle{
+  color:#9fb3ff;
+  margin-bottom:40px;
+}
+.card{
+  background:#141a33;
+  padding:35px;
+  border-radius:20px;
+}
+textarea,input{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:8px;
+  border:none;
+  font-size:15px;
+}
+button{
+  margin-top:15px;
+  padding:14px 36px;
+  border:none;
+  border-radius:30px;
+  background:#00eaff;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{
+  box-shadow:0 0 15px #00eaff;
+}
+label{
+  color:#9fb3ff;
+  font-size:14px;
+  display:block;
+  text-align:left;
+  margin-top:10px;
+}
+.back{
+  display:inline-block;
+  margin-top:35px;
+  color:#9fb3ff;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>M3U ➜ Xtream Converter</h1>
+  <div class="subtitle">Extract Xtream login details from M3U URL</div>
+
+  <div class="card">
+    <textarea id="m3u" placeholder="Paste full M3U URL here"></textarea>
+
+    <button onclick="convert()">Convert</button>
+
+    <label>Server URL</label>
+    <input id="server" readonly>
+
+    <label>Username</label>
+    <input id="user" readonly>
+
+    <label>Password</label>
+    <input id="pass" readonly>
+  </div>
+
+  <a href="explore.html" class="back">← Back to Explore</a>
+</div>
+
+<script>
+function convert(){
+  const m3u = document.getElementById("m3u").value.trim();
+
+  if(!m3u){
+    alert("Paste M3U URL first");
+    return;
+  }
+
+  try{
+    const url = new URL(m3u);
+    const server = url.protocol + "//" + url.host;
+    const user = url.searchParams.get("username");
+    const pass = url.searchParams.get("password");
+
+    if(!user || !pass){
+      alert("This is not a valid Xtream M3U link");
+      return;
+    }
+
+    document.getElementById("server").value = server;
+    document.getElementById("user").value = user;
+    document.getElementById("pass").value = pass;
+  }catch(e){
+    alert("Invalid URL format");
+  }
+}
+</script>
+
+</body>
+</html>
