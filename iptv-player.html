@@ -2,47 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IPTV Player – TechnologySR</title>
+<title>IPTV Player • TechnologySR</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <style>
-body{
-  margin:0;
-  background:#0b132b;
-  color:#fff;
-  font-family:system-ui,Arial;
+body{margin:0;font-family:Arial;background:#0b1220;color:#fff}
+header{padding:14px;background:#111735;text-align:center;font-size:20px;font-weight:bold}
+
+.container{display:flex;height:calc(100vh - 60px)}
+
+.categories{
+  width:22%;
+  background:#0d1430;
+  border-right:1px solid #1f2b55;
+  overflow-y:auto;
 }
-.top{
+.category{
   padding:12px;
-  text-align:center;
-  font-size:20px;
-  font-weight:600;
+  cursor:pointer;
+  border-bottom:1px solid #1f2b55;
 }
-.layout{
-  display:flex;
-  height:calc(100vh - 60px);
+.category:hover,.category.active{
+  background:#1c2760;
 }
-.list{
-  width:35%;
-  overflow:auto;
-  border-right:1px solid #1c2541;
+
+.channels{
+  width:30%;
+  background:#0f1735;
+  overflow-y:auto;
 }
-.item{
+.channel{
   padding:10px;
-  border-bottom:1px solid #1c2541;
+  border-bottom:1px solid #1e2a55;
   cursor:pointer;
 }
-.item:hover{
-  background:#1c2541;
+.channel:hover{
+  background:#1b2450;
 }
+
 .player{
-  width:65%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  flex:1;
+  padding:10px;
 }
 video{
-  width:95%;
+  width:100%;
+  height:100%;
   background:#000;
   border-radius:12px;
 }
@@ -51,50 +57,89 @@ video{
 
 <body>
 
-<div class="top">TechnologySR IPTV Player</div>
+<header>TechnologySR IPTV Player</header>
 
-<div class="layout">
-  <div class="list" id="channels"></div>
+<div class="container">
+  <div class="categories" id="categories">Loading…</div>
+  <div class="channels" id="channels">Select category</div>
   <div class="player">
     <video id="video" controls autoplay></video>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
 <script>
-const PLAYLIST =
+const M3U_URL =
 "https://raw.githubusercontent.com/TechnologySR/TechnologySR.github.io/main/iptv/index.m3u";
 
-const box = document.getElementById("channels");
+const categoriesDiv = document.getElementById("categories");
+const channelsDiv = document.getElementById("channels");
 const video = document.getElementById("video");
 
-fetch(PLAYLIST)
-.then(r=>r.text())
-.then(text=>{
-  const lines=text.split("\n");
+let data = {};
+let hls;
+
+fetch(M3U_URL)
+.then(r => r.text())
+.then(parseM3U)
+.catch(() => categoriesDiv.innerHTML = "❌ Playlist load failed");
+
+function parseM3U(text){
+  const lines = text.split("\n");
+  let current = {};
+
   for(let i=0;i<lines.length;i++){
     if(lines[i].startsWith("#EXTINF")){
-      const name=lines[i].split(",")[1];
-      const url=lines[i+1];
-      if(name && url){
-        const div=document.createElement("div");
-        div.className="item";
-        div.textContent=name;
-        div.onclick=()=>play(url.trim());
-        box.appendChild(div);
-      }
+      current.name = lines[i].split(",")[1];
+      current.group =
+        (lines[i].match(/group-title="(.*?)"/)||[])[1] || "Other";
+    }
+    if(lines[i].startsWith("http")){
+      current.url = lines[i].trim();
+      if(!data[current.group]) data[current.group] = [];
+      data[current.group].push({...current});
     }
   }
-});
+  showCategories();
+}
+
+function showCategories(){
+  categoriesDiv.innerHTML = "";
+  Object.keys(data).forEach((cat, i)=>{
+    const div = document.createElement("div");
+    div.className = "category" + (i===0?" active":"");
+    div.textContent = cat;
+    div.onclick = ()=> selectCategory(cat, div);
+    categoriesDiv.appendChild(div);
+    if(i===0) showChannels(cat);
+  });
+}
+
+function selectCategory(cat, el){
+  document.querySelectorAll(".category")
+    .forEach(c=>c.classList.remove("active"));
+  el.classList.add("active");
+  showChannels(cat);
+}
+
+function showChannels(cat){
+  channelsDiv.innerHTML = "";
+  data[cat].forEach(ch=>{
+    const div = document.createElement("div");
+    div.className = "channel";
+    div.textContent = ch.name;
+    div.onclick = ()=> play(ch.url);
+    channelsDiv.appendChild(div);
+  });
+}
 
 function play(url){
+  if(hls) hls.destroy();
   if(Hls.isSupported() && url.includes(".m3u8")){
-    const hls=new Hls();
+    hls = new Hls();
     hls.loadSource(url);
     hls.attachMedia(video);
   }else{
-    video.src=url;
+    video.src = url;
   }
 }
 </script>
