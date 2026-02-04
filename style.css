@@ -1,33 +1,36 @@
-body {
+*{
   margin: 0;
-  height: 100vh;
-  background: url("background.png") no-repeat center center fixed;
-  background-size: cover;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  min-height: 100vh;
+  background-image: url("background.png"); /* image name */
+  background-size: cover;          /* poora screen cover */
+  background-position: center;     /* center me rahe */
+  background-repeat: no-repeat;    /* repeat na ho */
+  background-attachment: fixed;    /* scroll pe fixed rahe */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
+  color: #00ffff;
 }
 
-h1 {
-  color: #00eaff;
-  text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
-  margin-bottom: 30px;
+/* Heading */
+h1{
+  text-shadow: 0 0 15px cyan;
 }
 
-.neon-btn {
-  text-decoration: none;
-  color: #00eaff;
-  border: 2px solid #00eaff;
+/* Explore button */
+.neon-btn{
+  margin-top: 20px;
   padding: 12px 30px;
+  text-decoration: none;
+  color: #00ffff;
+  border: 2px solid cyan;
   border-radius: 30px;
-  font-size: 18px;
-  box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
-  transition: 0.3s;
-}
-
-.neon-btn:hover {
-  background: #00eaff;
-  color: black;
+  box-shadow: 0 0 15px cyan;
 }
