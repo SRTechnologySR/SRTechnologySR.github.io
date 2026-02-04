@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Technology SR | IPTV Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #0f2027, #000);
+  color: #0ff;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  text-shadow: 0 0 15px #0ff;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 10px;
+}
+
+.card {
+  background: rgba(0,0,0,0.6);
+  border: 2px solid #0ff;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px #0ff;
+}
+
+.card h2 {
+  text-align: center;
+  text-shadow: 0 0 10px #0ff;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  background: black;
+  border: 1px solid #0ff;
+  color: #0ff;
+  border-radius: 8px;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #000;
+  color: #0ff;
+  border: 2px solid #0ff;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #0ff;
+}
+
+button:hover {
+  background: #0ff;
+  color: #000;
+}
+
+.output {
+  margin-top: 10px;
+  font-size: 14px;
+  word-break: break-all;
+}
+</style>
+</head>
+
+<body>
+
+<h1>⚡ Technology SR – IPTV Tools</h1>
+
+<div class="container">
+
+<!-- Xtream to M3U -->
+<div class="card">
+  <h2>Xtream ➜ M3U</h2>
+  <input id="portal" placeholder="Portal URL">
+  <input id="user" placeholder="Username">
+  <input id="pass" placeholder="Password">
+  <button onclick="genM3U()">Generate M3U</button>
+  <div class="output" id="m3uOut"></div>
+</div>
+
+<!-- M3U to Xtream -->
+<div class="card">
+  <h2>M3U ➜ Xtream</h2>
+  <input id="m3u" placeholder="Paste M3U link">
+  <button onclick="extract()">Extract Details</button>
+  <div class="output" id="xtOut"></div>
+</div>
+
+</div>
+
+<script>
+function genM3U() {
+  let p = portal.value;
+  let u = user.value;
+  let pw = pass.value;
+  let link = `${p}/get.php?username=${u}&password=${pw}&type=m3u_plus&output=ts`;
+  m3uOut.innerText = link;
+}
+
+function extract() {
+  let m = m3u.value;
+  try {
+    let url = new URL(m);
+    let user = url.searchParams.get("username");
+    let pass = url.searchParams.get("password");
+    xtOut.innerText =
+      "Portal: " + url.origin +
+      "\nUsername: " + user +
+      "\nPassword: " + pass;
+  } catch {
+    xtOut.innerText = "Invalid M3U link";
+  }
+}
+</script>
+
+</body>
+</html>
