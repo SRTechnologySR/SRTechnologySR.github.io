@@ -1,36 +1,27 @@
-*{
+body{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  background: url("background.png") center/cover no-repeat;
   font-family: Arial, sans-serif;
+  text-align: center;
 }
 
-body{
-  min-height: 100vh;
-  background-image: url("background.png"); /* image name */
-  background-size: cover;          /* poora screen cover */
-  background-position: center;     /* center me rahe */
-  background-repeat: no-repeat;    /* repeat na ho */
-  background-attachment: fixed;    /* scroll pe fixed rahe */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #00ffff;
-}
-
-/* Heading */
+/* Neon title */
 h1{
-  text-shadow: 0 0 15px cyan;
+  margin-top: 60px;
+  color: #00f7ff;
+  text-shadow: 0 0 8px #00f7ff, 0 0 16px #00f7ff;
 }
 
-/* Explore button */
+/* Neon button */
 .neon-btn{
-  margin-top: 20px;
-  padding: 12px 30px;
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 28px;
+  color: #00ff9c;
+  border: 2px solid #00ff9c;
+  border-radius: 10px;
   text-decoration: none;
-  color: #00ffff;
-  border: 2px solid cyan;
-  border-radius: 30px;
-  box-shadow: 0 0 15px cyan;
+  font-size: 18px;
+  box-shadow: 0 0 10px #00ff9c;
 }
