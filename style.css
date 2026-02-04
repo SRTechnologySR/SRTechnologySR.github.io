@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: url("background.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #00eaff;
+  text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+  margin-bottom: 30px;
+}
+
+.neon-btn {
+  text-decoration: none;
+  color: #00eaff;
+  border: 2px solid #00eaff;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 18px;
+  box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+  transition: 0.3s;
+}
+
+.neon-btn:hover {
+  background: #00eaff;
+  color: black;
+}
