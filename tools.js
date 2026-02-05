@@ -1,62 +1,78 @@
-// Technology SR – Tools JS
+// =======================================
+// Technology SR – Ultra Safe Tools Script
+// =======================================
 
-function makeCopyable(el) {
-  el.style.userSelect = "text";
-  el.style.webkitUserSelect = "text";
-  el.style.msUserSelect = "text";
-}
+// Core logic (single source of truth)
+function _extractCore() {
+  const inputEl = document.getElementById("m3uInput");
+  const outputEl = document.getElementById("resultBox");
 
-// =======================
-// M3U ➜ XTREAM (EXTRACT)
-// =======================
-function extract() {
-  const input = document.getElementById("m3uInput").value;
-  const output = document.getElementById("resultBox");
+  if (!inputEl || !outputEl) {
+    alert("❌ Required elements not found");
+    return;
+  }
+
+  const input = inputEl.value.trim();
 
   if (!input || !input.includes("get.php")) {
-    output.innerText = "❌ Invalid M3U URL";
-    makeCopyable(output);
+    outputEl.innerText = "❌ Invalid M3U URL";
+    enableCopy(outputEl);
     return;
   }
 
   try {
     const url = new URL(input);
-
     const server = url.origin;
     const username = url.searchParams.get("username");
     const password = url.searchParams.get("password");
 
     if (!username || !password) {
-      output.innerText = "❌ Username or Password not found";
-      makeCopyable(output);
+      outputEl.innerText = "❌ Username / Password missing";
+      enableCopy(outputEl);
       return;
     }
 
-    output.innerText =
+    outputEl.innerText =
 `Server: ${server}
 Username: ${username}
 Password: ${password}`;
 
-    makeCopyable(output);
+    enableCopy(outputEl);
 
-  } catch (err) {
-    output.innerText = "❌ Error reading URL";
-    makeCopyable(output);
+  } catch (e) {
+    outputEl.innerText = "❌ Failed to parse URL";
+    enableCopy(outputEl);
   }
 }
 
-// =======================
-// XTREAM ➜ M3U (GENERATE)
-// =======================
-function generate() {
-  const server = document.getElementById("serverInput").value;
-  const user = document.getElementById("userInput").value;
-  const pass = document.getElementById("passInput").value;
+// Make text selectable (desktop + mobile)
+function enableCopy(el) {
+  el.style.userSelect = "text";
+  el.style.webkitUserSelect = "text";
+  el.style.msUserSelect = "text";
+  el.style.cursor = "text";
+}
+
+// ================================
+// EXPOSE ALL POSSIBLE FUNCTION NAMES
+// ================================
+window.extract = _extractCore;
+window.extractXtream = _extractCore;
+window.m3uToXtream = _extractCore;
+window.convert = _extractCore;
+
+// ================================
+// XTREAM ➜ M3U (Generator)
+// ================================
+function _generateCore() {
+  const server = document.getElementById("serverInput")?.value.trim();
+  const user = document.getElementById("userInput")?.value.trim();
+  const pass = document.getElementById("passInput")?.value.trim();
   const output = document.getElementById("resultBox");
 
   if (!server || !user || !pass) {
     output.innerText = "❌ Fill all fields";
-    makeCopyable(output);
+    enableCopy(output);
     return;
   }
 
@@ -65,5 +81,9 @@ function generate() {
   output.innerText =
 `${cleanServer}/get.php?username=${user}&password=${pass}&type=m3u_plus&output=ts`;
 
-  makeCopyable(output);
+  enableCopy(output);
 }
+
+// Expose generator safely
+window.generate = _generateCore;
+window.xtreamToM3U = _generateCore;
