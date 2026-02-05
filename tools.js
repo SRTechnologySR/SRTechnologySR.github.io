@@ -1,97 +1,89 @@
-// =======================================
-// Technology SR – ID-FREE Tools Script
-// =======================================
+// ===============================
+// COMMON HELPERS
+// ===============================
+function $(id) {
+  return document.getElementById(id);
+}
 
-// Find inputs automatically
-function getFields() {
-  const fields = document.querySelectorAll("input, textarea");
+function getAnyId(ids) {
+  for (let id of ids) {
+    let el = $(id);
+    if (el) return el;
+  }
+  return null;
+}
 
-  if (fields.length < 2) {
-    return null;
+function showAlert(msg) {
+  alert(msg);
+}
+
+// ===============================
+// M3U → XTREAM
+// ===============================
+function convertM3UtoXtream() {
+  const m3uInput = getAnyId(["m3uInput", "m3u", "m3uLink"]);
+  const resultBox = getAnyId(["resultBox", "output", "xtreamResult"]);
+
+  if (!m3uInput || !resultBox) {
+    showAlert("IDs missing: m3uInput or resultBox");
+    return;
   }
 
-  return {
-    input: fields[0],   // M3U input
-    output: fields[fields.length - 1] // Result box
-  };
-}
-
-// Write output safely (copyable)
-function writeOutput(el, text) {
-  el.value = text;
-  el.readOnly = true;
-  el.style.userSelect = "text";
-  el.style.webkitUserSelect = "text";
-  el.style.cursor = "text";
-}
-
-// =======================
-// M3U ➜ XTREAM
-// =======================
-function extract() {
-  const fields = getFields();
-  if (!fields) return;
-
-  const urlText = fields.input.value.trim();
-
-  if (!urlText.includes("get.php")) {
-    writeOutput(fields.output, "❌ Invalid M3U URL");
+  const m3u = m3uInput.value.trim();
+  if (!m3u) {
+    showAlert("Please paste M3U link");
     return;
   }
 
   try {
-    const url = new URL(urlText);
-
-    const server = url.origin;
+    const url = new URL(m3u);
+    const host = url.origin;
     const username = url.searchParams.get("username");
     const password = url.searchParams.get("password");
 
     if (!username || !password) {
-      writeOutput(fields.output, "❌ Username or Password not found");
+      showAlert("Invalid M3U link");
       return;
     }
 
-    writeOutput(
-      fields.output,
-`Server: ${server}
-Username: ${username}
-Password: ${password}`
-    );
+    const text =
+`🔹 Technology SR 🔹
 
-  } catch (e) {
-    writeOutput(fields.output, "❌ URL parsing failed");
+Host: ${host}
+Username: ${username}
+Password: ${password}`;
+
+    resultBox.value = text;
+    resultBox.select();
+    document.execCommand("copy");
+  } catch {
+    showAlert("Invalid URL format");
   }
 }
 
-// =======================
-// XTREAM ➜ M3U
-// =======================
-function generate() {
-  const fields = document.querySelectorAll("input, textarea");
+// ===============================
+// XTREAM → M3U
+// ===============================
+function convertXtreamToM3U() {
+  const host = getAnyId(["host", "server", "xtreamHost"]);
+  const user = getAnyId(["username", "user", "xtreamUser"]);
+  const pass = getAnyId(["password", "pass", "xtreamPass"]);
+  const resultBox = getAnyId(["resultBox", "output", "m3uResult"]);
 
-  if (fields.length < 4) return;
-
-  const server = fields[0].value.trim();
-  const user = fields[1].value.trim();
-  const pass = fields[2].value.trim();
-  const output = fields[fields.length - 1];
-
-  if (!server || !user || !pass) {
-    writeOutput(output, "❌ Fill all fields");
+  if (!host || !user || !pass || !resultBox) {
+    showAlert("One or more fields missing");
     return;
   }
 
-  const cleanServer = server.replace(/\/$/, "");
+  if (!host.value || !user.value || !pass.value) {
+    showAlert("Fill all fields");
+    return;
+  }
 
-  writeOutput(
-    output,
-`${cleanServer}/get.php?username=${user}&password=${pass}&type=m3u_plus&output=ts`
-  );
-}
+  const m3u =
+`${host.value}/get.php?username=${user.value}&password=${pass.value}&type=m3u_plus&output=ts`;
 
-// Safety aliases (ANY button name works)
-window.extractXtream = extract;
-window.m3uToXtream = extract;
-window.convert = extract;
-window.generateM3U = generate;
-window.xtreamToM3U = generate;
+  resultBox.value = m3u;
+  resultBox.select();
+  document.execCommand("copy");
+  }
