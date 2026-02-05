@@ -67,3 +67,22 @@ input, textarea {
   padding: 10px;
   border-radius: 10px;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65); /* dark overlay */
+  z-index: -1;
+}
+
+body {
+  background-image: url("technology-sr-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
