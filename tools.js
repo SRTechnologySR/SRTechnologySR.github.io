@@ -1,89 +1,93 @@
 // =======================================
-// Technology SR – Ultra Safe Tools Script
+// Technology SR – FINAL FIX Tools Script
 // =======================================
 
-// Core logic (single source of truth)
-function _extractCore() {
-  const inputEl = document.getElementById("m3uInput");
-  const outputEl = document.getElementById("resultBox");
+function writeOutput(el, text) {
+  if (!el) return;
 
-  if (!inputEl || !outputEl) {
-    alert("❌ Required elements not found");
-    return;
+  if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+    el.value = text;
+  } else {
+    el.innerText = text;
   }
 
-  const input = inputEl.value.trim();
-
-  if (!input || !input.includes("get.php")) {
-    outputEl.innerText = "❌ Invalid M3U URL";
-    enableCopy(outputEl);
-    return;
-  }
-
-  try {
-    const url = new URL(input);
-    const server = url.origin;
-    const username = url.searchParams.get("username");
-    const password = url.searchParams.get("password");
-
-    if (!username || !password) {
-      outputEl.innerText = "❌ Username / Password missing";
-      enableCopy(outputEl);
-      return;
-    }
-
-    outputEl.innerText =
-`Server: ${server}
-Username: ${username}
-Password: ${password}`;
-
-    enableCopy(outputEl);
-
-  } catch (e) {
-    outputEl.innerText = "❌ Failed to parse URL";
-    enableCopy(outputEl);
-  }
-}
-
-// Make text selectable (desktop + mobile)
-function enableCopy(el) {
   el.style.userSelect = "text";
   el.style.webkitUserSelect = "text";
   el.style.msUserSelect = "text";
   el.style.cursor = "text";
 }
 
-// ================================
-// EXPOSE ALL POSSIBLE FUNCTION NAMES
-// ================================
-window.extract = _extractCore;
-window.extractXtream = _extractCore;
-window.m3uToXtream = _extractCore;
-window.convert = _extractCore;
-
-// ================================
-// XTREAM ➜ M3U (Generator)
-// ================================
-function _generateCore() {
-  const server = document.getElementById("serverInput")?.value.trim();
-  const user = document.getElementById("userInput")?.value.trim();
-  const pass = document.getElementById("passInput")?.value.trim();
+// =======================
+// M3U ➜ XTREAM
+// =======================
+function extract() {
+  const input = document.getElementById("m3uInput");
   const output = document.getElementById("resultBox");
 
-  if (!server || !user || !pass) {
-    output.innerText = "❌ Fill all fields";
-    enableCopy(output);
+  if (!input || !output) {
+    alert("IDs missing: m3uInput or resultBox");
     return;
   }
 
-  const cleanServer = server.replace(/\/$/, "");
+  const urlText = input.value.trim();
 
-  output.innerText =
-`${cleanServer}/get.php?username=${user}&password=${pass}&type=m3u_plus&output=ts`;
+  if (!urlText || !urlText.includes("get.php")) {
+    writeOutput(output, "❌ Invalid M3U URL");
+    return;
+  }
 
-  enableCopy(output);
+  try {
+    const url = new URL(urlText);
+    const server = url.origin;
+    const username = url.searchParams.get("username");
+    const password = url.searchParams.get("password");
+
+    if (!username || !password) {
+      writeOutput(output, "❌ Username or Password not found");
+      return;
+    }
+
+    writeOutput(
+      output,
+`Server: ${server}
+Username: ${username}
+Password: ${password}`
+    );
+
+  } catch (e) {
+    writeOutput(output, "❌ URL parsing failed");
+  }
 }
 
-// Expose generator safely
-window.generate = _generateCore;
-window.xtreamToM3U = _generateCore;
+// =======================
+// XTREAM ➜ M3U
+// =======================
+function generate() {
+  const server = document.getElementById("serverInput");
+  const user = document.getElementById("userInput");
+  const pass = document.getElementById("passInput");
+  const output = document.getElementById("resultBox");
+
+  if (!server || !user || !pass || !output) {
+    alert("One or more fields missing");
+    return;
+  }
+
+  if (!server.value || !user.value || !pass.value) {
+    writeOutput(output, "❌ Fill all fields");
+    return;
+  }
+
+  const cleanServer = server.value.replace(/\/$/, "");
+
+  writeOutput(
+    output,
+`${cleanServer}/get.php?username=${user.value}&password=${pass.value}&type=m3u_plus&output=ts`
+  );
+}
+
+// Safety aliases (in case HTML uses other names)
+window.extractXtream = extract;
+window.m3uToXtream = extract;
+window.convert = extract;
+window.xtreamToM3U = generate;
