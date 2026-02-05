@@ -86,4 +86,4 @@ function convertXtreamToM3U() {
   resultBox.value = m3u;
   resultBox.select();
   document.execCommand("copy");
-  }
+}
