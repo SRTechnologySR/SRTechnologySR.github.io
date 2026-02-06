@@ -44,18 +44,12 @@ function login() {
   const p = document.getElementById("password").value.trim();
   const msg = document.getElementById("msg");
 
-  if (!u || !p) {
-    msg.innerText = "Enter username & password ❗";
-    return;
-  }
-
   if (USERS[u] && USERS[u].pass === p) {
     localStorage.setItem("auth", "yes");
     localStorage.setItem("user", u);
     localStorage.setItem("role", USERS[u].role);
-
     window.location.href = "index.html";
   } else {
     msg.innerText = "Invalid login ❌";
   }
-      }
+}
