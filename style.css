@@ -1,123 +1,139 @@
+/* ===== RESET ===== */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
-  background: url("background.png") no-repeat center center fixed;
-  background-size: cover;
+  background: url("technology-sr-bg.png") center / cover no-repeat fixed;
   color: #00ffd5;
 }
 
-/* Dark overlay for readability */
+/* dark overlay */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0,0,0,0.65);
   z-index: -1;
 }
 
-/* Header */
-h1 {
+/* ===== NAV ===== */
+.top-nav {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding: 12px;
+}
+
+.top-nav a {
+  text-decoration: none;
+  color: #00ffd5;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,255,213,0.5);
+  background: rgba(0,0,0,0.6);
+  box-shadow: 0 0 10px rgba(0,255,213,0.3);
+}
+
+.top-nav a.active,
+.top-nav a:hover {
+  background: #00ffd5;
+  color: #000;
+}
+
+/* ===== AI CONTAINER ===== */
+.ai-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.ai-container h1 {
   text-align: center;
-  margin-top: 20px;
   font-size: 2.2rem;
   text-shadow: 0 0 15px #00ffd5;
 }
 
-p {
+.subtitle {
   text-align: center;
-  margin-bottom: 15px;
-  color: #bff;
+  margin: 10px 0 20px;
+  opacity: 0.9;
 }
 
-/* Main container */
-.container {
-  max-width: 420px;
-  margin: auto;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 213, 0.25);
+/* ===== CONTROLS ===== */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
-/* Inputs */
-input,
-select,
-textarea,
-button {
-  width: 100%;
-  margin: 6px 0;
+.controls input,
+.controls select {
+  flex: 1;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
-  font-size: 14px;
+  outline: none;
 }
 
-/* Search & select */
-input,
-select,
-textarea {
-  background: #111;
-  color: #00ffd5;
-  border: 1px solid #00ffd5;
+/* ===== STATUS ===== */
+#status {
+  margin: 10px 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
 }
 
-/* Buttons */
-button {
-  background: #00ffd5;
-  color: #000;
-  font-weight: bold;
+/* ===== CHANNEL LIST ===== */
+.channel-list {
+  max-height: 320px;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.55);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.channel-list label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #00c9aa;
+.channel-list input {
+  accent-color: #00ffd5;
 }
 
-/* Button group */
-.button-row {
+/* ===== ACTIONS ===== */
+.actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
-.button-row button {
+.actions button {
   flex: 1;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  font-weight: bold;
+  background: #00ffd5;
+  color: #000;
+  box-shadow: 0 0 15px rgba(0,255,213,0.8);
+  cursor: pointer;
 }
 
-/* Status */
-#status {
-  text-align: center;
-  margin: 10px 0;
-  font-size: 13px;
-  color: #8ff;
-}
-
-/* Channel list */
-#channelList {
-  max-height: 220px;
-  overflow-y: auto;
-  margin-top: 10px;
-  border: 1px solid #00ffd5;
-  border-radius: 8px;
-  padding: 8px;
-}
-
-.channel {
-  padding: 6px;
-  border-bottom: 1px solid rgba(0, 255, 213, 0.2);
-  font-size: 14px;
-}
-
-.channel:last-child {
-  border-bottom: none;
-}
-
-/* Output */
+/* ===== OUTPUT ===== */
 textarea {
-  height: 140px;
-  resize: none;
+  width: 100%;
+  min-height: 160px;
+  border-radius: 12px;
+  padding: 12px;
+  border: none;
+  resize: vertical;
 }
