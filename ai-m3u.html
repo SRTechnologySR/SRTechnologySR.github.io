@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI M3U Builder – Technology SR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <h1 class="neon">AI M3U Builder</h1>
+  <p class="tag">Select channels and build your custom playlist</p>
+
+  <input id="search" type="text" placeholder="Search channel…">
+
+  <select id="groupFilter">
+    <option value="all">All Groups</option>
+  </select>
+
+  <div id="status" class="status">Loading playlist…</div>
+
+  <div id="channelList" class="list"></div>
+
+  <button class="btn" onclick="generateM3U()">Generate My M3U</button>
+
+  <textarea id="output" placeholder="Your custom M3U will appear here"></textarea>
+
+  <button class="btn" onclick="copyM3U()">Copy</button>
+  <button class="btn" onclick="downloadM3U()">Download .m3u</button>
+</div>
+
+<script src="ai-m3u.js"></script>
+</body>
+</html>
