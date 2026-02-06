@@ -103,38 +103,3 @@ function downloadM3U() {
   a.download = "TechnologySR.m3u";
   a.click();
 }
-
-/* ===== NAVBAR FIX ===== */
-
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin: 12px 0 20px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #00ffd5;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(0,255,213,0.5);
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  box-shadow: 0 0 10px rgba(0,255,213,0.25);
-  transition: all 0.25s ease;
-}
-
-/* Hover glow */
-nav a:hover {
-  background: #00ffd5;
-  color: #000;
-  box-shadow: 0 0 18px rgba(0,255,213,0.8);
-}
-
-/* Active page highlight */
-nav a.active {
-  background: #00ffd5;
-  color: #000;
-}
