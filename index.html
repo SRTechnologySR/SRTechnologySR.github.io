@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Technology SR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
-
-  <!-- 🔐 LOGIN CHECK -->
-  <script>
-    if (localStorage.getItem("auth") !== "yes") {
-      window.location.href = "login.html";
-    }
-  </script>
 </head>
-
 <body>
 
-  <div class="center">
-    <h1 class="neon">Technology SR</h1>
-    <p class="tagline">
-      IPTV • M3U • Xtream • Stalker • MAC Portal
-    </p>
+<!-- 🔐 LOGIN CHECK -->
+<script>
+  if (localStorage.getItem("auth") !== "yes") {
+    window.location.href = "login.html";
+  }
+</script>
 
-    <a href="explore.html" class="btn big">EXPLORE</a>
+<header class="hero">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1 class="title">Technology SR</h1>
+    <p class="subtitle">IPTV • M3U • Xtream • Stalker • MAC Portal</p>
+    <span class="explore">EXPLORE</span>
   </div>
+</header>
 
+<script src="script.js"></script>
 </body>
 </html>
