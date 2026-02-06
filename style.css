@@ -1,65 +1,43 @@
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* BACKGROUND */
-body {
-  min-height: 100vh;
-  background-image: url("technology-sr-bg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   font-family: Arial, sans-serif;
-  position: relative;
 }
 
-/* DARK OVERLAY (FIXED) */
-body::before {
-  content: "";
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+}
+
+/* Background Image */
+.bg {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 0;   /* 🔥 MOST IMPORTANT */
+  background: url("technology-sr-bg.png") center/cover no-repeat;
+  filter: brightness(0.6);
+  z-index: -1;
 }
 
-/* CONTENT */
-.center {
-  position: relative;
-  z-index: 1;   /* 🔥 overlay se upar */
-  text-align: center;
-  padding-top: 80px;
+/* Center Content */
+.content {
+  position: absolute;
+  top: 10%;
+  left: 5%;
 }
 
-/* NEON TITLE */
-.neon {
-  font-size: 42px;
-  color: #00ffd5;
-  text-shadow: 0 0 10px #00ffd5, 0 0 30px #00ffd5;
+/* Neon Title */
+.title {
+  font-size: 48px;
+  color: #00ffe5;
+  text-shadow: 0 0 10px #00ffe5, 0 0 20px #00ffe5;
 }
 
-/* TAGLINE */
-.tagline {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #bff;
-}
-
-/* BUTTON */
-.btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 12px 28px;
-  color: #000;
-  background: #00ffd5;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 6px;
-}
-
-.btn.big {
-  font-size: 18px;
+/* Subtitle */
+.subtitle {
+  margin-top: 8px;
+  font-size: 20px;
+  color: #b300ff;
+  text-shadow: 0 0 8px #b300ff;
 }
