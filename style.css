@@ -1,128 +1,65 @@
-/* RESET */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* BODY BACKGROUND */
 body {
+  margin: 0;
   min-height: 100vh;
-  background: url("technology-sr-bg.png") no-repeat center center fixed;
+  background: #000;
+  font-family: Arial, sans-serif;
+  color: #00ffcc;
+
+  background-image: url("technology-sr-bg.png");
   background-size: cover;
-  color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* DARK OVERLAY */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-}
-
-.hero .overlay {
-  position: absolute;
+body::before {
+  content: "";
+  position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  z-index: 1;
+  background: rgba(0,0,0,0.65);
+  z-index: -1;
 }
 
-/* HERO CONTENT */
-.hero-content {
-  position: relative;
-  z-index: 2;
-  height: 100%;
+/* CENTER CONTENT */
+.center {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  gap: 18px;
   padding: 20px;
 }
 
-/* TITLE */
-.title {
-  font-size: 42px;
-  color: #00ffe1;
-  text-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1;
-  margin-bottom: 10px;
+/* NEON TITLE */
+.neon {
+  font-size: 2.5rem;
+  text-shadow:
+    0 0 5px #00ffcc,
+    0 0 15px #00ffcc,
+    0 0 30px #00ffcc;
 }
 
-/* SUBTITLE */
-.subtitle {
-  font-size: 15px;
-  letter-spacing: 1px;
-  color: #c8fff7;
-  margin-bottom: 25px;
-}
-
-/* EXPLORE TEXT */
-.explore {
-  font-size: 18px;
-  color: #9b5cff;
-  text-shadow: 0 0 8px #9b5cff;
-  cursor: pointer;
-}
-
-/* LOGIN BOX (agar future me use ho) */
-.login-box {
-  position: relative;
-  z-index: 2;
-  width: 300px;
-  margin: 40px auto;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 8px;
+/* NEON BUTTON */
+.btn {
+  width: 100%;
+  max-width: 320px;
+  padding: 15px;
   text-align: center;
+  text-decoration: none;
+  color: #00ffcc;
+  border: 2px solid #00ffcc;
+  border-radius: 30px;
+  box-shadow: 0 0 15px #00ffcc;
+  transition: 0.3s;
 }
 
-.login-box h2 {
-  margin-bottom: 15px;
-  color: #00ffe1;
-}
-
-.login-box input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-}
-
-.login-box button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background: #00ffe1;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.login-box button:hover {
-  background: #00ccb5;
-}
-
-#msg {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #ff6b6b;
-}
-
-/* MOBILE FIX */
-@media (max-width: 600px) {
-  .title {
-    font-size: 32px;
-  }
-
-  .subtitle {
-    font-size: 13px;
-  }
-
-  .explore {
-    font-size: 16px;
-  }
+.btn:hover {
+  background: #00ffcc;
+  color: #000;
 }
