@@ -2,61 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Technology SR | AI M3U Builder</title>
+  <title>Technology SR • AI M3U Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SAME CSS FILE, NO CHANGE -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="ai-page">
 
-  <!-- NAV (agar pehle se hai to same rehne do) -->
-  <nav class="nav">
+  <!-- NAV -->
+  <nav class="top-nav">
     <a href="index.html">Home</a>
     <a href="explore.html">Explore</a>
-    <a href="ai-m3u.html">Tools</a>
+    <a href="ai-m3u.html" class="active">Tools</a>
   </nav>
 
-  <div class="container">
+  <!-- MAIN -->
+  <main class="ai-container">
+    <h1>Technology SR</h1>
+    <p class="subtitle">Create your own M3U playlist using AI-style selector</p>
 
-    <h1 class="neon">Technology SR</h1>
-    <p>Create your own M3U playlist using AI-style selector</p>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search channel...">
 
-    <!-- STATUS -->
-    <span id="status">Loading playlist...</span>
+      <select id="category">
+        <option value="all">All Categories</option>
+      </select>
+    </div>
 
-    <!-- SEARCH -->
-    <input
-      type="text"
-      id="search"
-      placeholder="Search channel..."
-    >
+    <div id="status">Loading playlist…</div>
 
-    <!-- GROUP FILTER -->
-    <select id="groupFilter">
-      <option value="all">All Categories</option>
-    </select>
+    <div id="channelList" class="channel-list"></div>
 
-    <!-- CHANNEL LIST -->
-    <div id="channelList"></div>
-
-    <!-- BUTTONS -->
-    <div class="buttons">
+    <div class="actions">
       <button onclick="generateM3U()">Generate M3U</button>
       <button onclick="copyM3U()">Copy</button>
       <button onclick="downloadM3U()">Download</button>
     </div>
 
-    <!-- OUTPUT -->
-    <textarea
-      id="output"
-      placeholder="Your generated M3U playlist will appear here"
-      rows="10"
-    ></textarea>
+    <textarea id="output" placeholder="Your generated M3U playlist will appear here"></textarea>
+  </main>
 
-  </div>
-
-  <!-- JS -->
   <script src="ai-m3u.js"></script>
 </body>
 </html>
