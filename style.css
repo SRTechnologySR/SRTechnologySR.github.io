@@ -6,38 +6,53 @@
 }
 
 body {
+  background: #000;
+}
+
+/* HERO SECTION */
+.hero {
+  position: relative;
   height: 100vh;
-  overflow: hidden;
-  background: black;
+  background: url("technology-sr-bg.png") no-repeat center;
+  background-size: cover;
 }
 
-/* Background Image */
-.bg {
-  position: fixed;
-  inset: 0;
-  background: url("technology-sr-bg.png") center/cover no-repeat;
-  filter: brightness(0.6);
-  z-index: -1;
-}
-
-/* Center Content */
-.content {
+/* DARK OVERLAY */
+.overlay {
   position: absolute;
-  top: 10%;
-  left: 5%;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
 }
 
-/* Neon Title */
-.title {
+/* TEXT */
+.hero-text {
+  position: absolute;
+  top: 12%;
+  left: 6%;
+  z-index: 2;
+}
+
+/* TITLE */
+.hero-text h1 {
   font-size: 48px;
   color: #00ffe5;
   text-shadow: 0 0 10px #00ffe5, 0 0 20px #00ffe5;
 }
 
-/* Subtitle */
-.subtitle {
-  margin-top: 8px;
+/* SUBTITLE */
+.hero-text p {
+  margin-top: 6px;
   font-size: 20px;
-  color: #b300ff;
-  text-shadow: 0 0 8px #b300ff;
+  color: #a855f7;
+  text-shadow: 0 0 8px #a855f7;
+}
+
+/* MOBILE FIX */
+@media (max-width: 600px) {
+  .hero-text h1 {
+    font-size: 40px;
+  }
+  .hero-text p {
+    font-size: 18px;
+  }
 }
