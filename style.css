@@ -1,65 +1,123 @@
 * {
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: #000;
-  font-family: Arial, sans-serif;
-  color: #00ffcc;
-
-  background-image: url("technology-sr-bg.png");
+  background: url("background.png") no-repeat center center fixed;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  color: #00ffd5;
 }
 
-/* DARK OVERLAY */
+/* Dark overlay for readability */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.75);
   z-index: -1;
 }
 
-/* CENTER CONTENT */
-.center {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-  padding: 20px;
-}
-
-/* NEON TITLE */
-.neon {
-  font-size: 2.5rem;
-  text-shadow:
-    0 0 5px #00ffcc,
-    0 0 15px #00ffcc,
-    0 0 30px #00ffcc;
-}
-
-/* NEON BUTTON */
-.btn {
-  width: 100%;
-  max-width: 320px;
-  padding: 15px;
+/* Header */
+h1 {
   text-align: center;
-  text-decoration: none;
-  color: #00ffcc;
-  border: 2px solid #00ffcc;
-  border-radius: 30px;
-  box-shadow: 0 0 15px #00ffcc;
-  transition: 0.3s;
+  margin-top: 20px;
+  font-size: 2.2rem;
+  text-shadow: 0 0 15px #00ffd5;
 }
 
-.btn:hover {
-  background: #00ffcc;
+p {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #bff;
+}
+
+/* Main container */
+.container {
+  max-width: 420px;
+  margin: auto;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 213, 0.25);
+}
+
+/* Inputs */
+input,
+select,
+textarea,
+button {
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+}
+
+/* Search & select */
+input,
+select,
+textarea {
+  background: #111;
+  color: #00ffd5;
+  border: 1px solid #00ffd5;
+}
+
+/* Buttons */
+button {
+  background: #00ffd5;
   color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00c9aa;
+}
+
+/* Button group */
+.button-row {
+  display: flex;
+  gap: 8px;
+}
+
+.button-row button {
+  flex: 1;
+}
+
+/* Status */
+#status {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 13px;
+  color: #8ff;
+}
+
+/* Channel list */
+#channelList {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-top: 10px;
+  border: 1px solid #00ffd5;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.channel {
+  padding: 6px;
+  border-bottom: 1px solid rgba(0, 255, 213, 0.2);
+  font-size: 14px;
+}
+
+.channel:last-child {
+  border-bottom: none;
+}
+
+/* Output */
+textarea {
+  height: 140px;
+  resize: none;
 }
