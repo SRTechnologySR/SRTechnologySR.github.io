@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script>
   <title>Technology SR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
+
+  <!-- LOGIN CHECK -->
+  <script>
+    if (localStorage.getItem("auth") !== "yes") {
+      window.location.href = "login.html";
+    }
+  </script>
 </head>
+
 <body>
 
 <div class="center">
