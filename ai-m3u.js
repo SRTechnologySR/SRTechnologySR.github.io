@@ -2,6 +2,7 @@ const M3U_URL = "index.m3u";
 
 let channels = [];
 
+/* ===== LOAD M3U ===== */
 fetch(M3U_URL)
   .then(res => res.text())
   .then(text => {
@@ -14,9 +15,10 @@ fetch(M3U_URL)
       "Playlist load nahi hui";
   });
 
+/* ===== PARSE M3U ===== */
 function parseM3U(text) {
   const lines = text.split(/\r?\n/);
-  const groups = new Set();
+  const categories = new Set();
 
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].startsWith("#EXTINF")) {
@@ -25,81 +27,86 @@ function parseM3U(text) {
       if (!url) continue;
 
       const name = info.split(",").pop().trim();
-      const groupMatch = info.match(/group-title="([^"]+)"/);
-      const group = groupMatch ? groupMatch[1] : "Other";
+      const group =
+        (info.match(/group-title="([^"]+)"/) || ["", "Other"])[1];
 
       channels.push({ info, url, name, group });
-      groups.add(group);
+      categories.add(group);
     }
   }
 
-  const groupFilter = document.getElementById("groupFilter");
-  groups.forEach(g => {
+  const categorySelect = document.getElementById("category");
+  categories.forEach(cat => {
     const opt = document.createElement("option");
-    opt.value = g;
-    opt.textContent = g;
-    groupFilter.appendChild(opt);
+    opt.value = cat;
+    opt.textContent = cat;
+    categorySelect.appendChild(opt);
   });
 
   renderChannels();
 }
 
+/* ===== RENDER CHANNELS ===== */
 function renderChannels() {
   const list = document.getElementById("channelList");
   const search = document.getElementById("search").value.toLowerCase();
-  const group = document.getElementById("groupFilter").value;
+  const category = document.getElementById("category").value;
 
   list.innerHTML = "";
 
-  channels.forEach((c, i) => {
+  channels.forEach((ch, i) => {
     if (
-      c.name.toLowerCase().includes(search) &&
-      (group === "all" || c.group === group)
+      ch.name.toLowerCase().includes(search) &&
+      (category === "all" || ch.group === category)
     ) {
-      const div = document.createElement("div");
-      div.className = "channel";
-      div.innerHTML = `
-        <label>
-          <input type="checkbox" data-index="${i}">
-          ${c.name}
-        </label>
+      const label = document.createElement("label");
+
+      label.innerHTML = `
+        <input type="checkbox" data-index="${i}">
+        <span>${ch.name}</span>
       `;
-      list.appendChild(div);
+
+      list.appendChild(label);
     }
   });
 }
 
+/* ===== EVENTS ===== */
 document.getElementById("search")
   .addEventListener("input", renderChannels);
 
-document.getElementById("groupFilter")
+document.getElementById("category")
   .addEventListener("change", renderChannels);
 
+/* ===== GENERATE M3U ===== */
 function generateM3U() {
   let out = "#EXTM3U\n";
 
   document
-    .querySelectorAll("input[type=checkbox]:checked")
+    .querySelectorAll('input[type="checkbox"]:checked')
     .forEach(cb => {
-      const c = channels[cb.dataset.index];
-      out += `${c.info}\n${c.url}\n`;
+      const ch = channels[cb.dataset.index];
+      out += ch.info + "\n" + ch.url + "\n";
     });
 
   document.getElementById("output").value = out;
 }
 
+/* ===== COPY ===== */
 function copyM3U() {
   const out = document.getElementById("output");
   out.select();
   document.execCommand("copy");
-  alert("Copied!");
+  alert("M3U copied");
 }
 
+/* ===== DOWNLOAD ===== */
 function downloadM3U() {
   const text = document.getElementById("output").value;
   const blob = new Blob([text], { type: "audio/x-mpegurl" });
+
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "TechnologySR.m3u";
+  a.download = "technology-sr.m3u";
   a.click();
 }
