@@ -25,20 +25,20 @@ function parseM3U(text) {
       if (!url) continue;
 
       const name = info.split(",").pop().trim();
-      const group =
-        (info.match(/group-title="([^"]+)"/) || [,"Other"])[1];
+      const groupMatch = info.match(/group-title="([^"]+)"/);
+      const group = groupMatch ? groupMatch[1] : "Other";
 
       channels.push({ info, url, name, group });
       groups.add(group);
     }
   }
 
-  const groupSelect = document.getElementById("groupFilter");
+  const groupFilter = document.getElementById("groupFilter");
   groups.forEach(g => {
-    const o = document.createElement("option");
-    o.value = g;
-    o.textContent = g;
-    groupSelect.appendChild(o);
+    const opt = document.createElement("option");
+    opt.value = g;
+    opt.textContent = g;
+    groupFilter.appendChild(opt);
   });
 
   renderChannels();
@@ -59,8 +59,10 @@ function renderChannels() {
       const div = document.createElement("div");
       div.className = "channel";
       div.innerHTML = `
-        <input type="checkbox" data-index="${i}">
-        <span>${c.name}</span>
+        <label>
+          <input type="checkbox" data-index="${i}">
+          ${c.name}
+        </label>
       `;
       list.appendChild(div);
     }
@@ -80,17 +82,17 @@ function generateM3U() {
     .querySelectorAll("input[type=checkbox]:checked")
     .forEach(cb => {
       const c = channels[cb.dataset.index];
-      out += c.info + "\n" + c.url + "\n";
+      out += `${c.info}\n${c.url}\n`;
     });
 
   document.getElementById("output").value = out;
 }
 
 function copyM3U() {
-  const t = document.getElementById("output");
-  t.select();
+  const out = document.getElementById("output");
+  out.select();
   document.execCommand("copy");
-  alert("Copied");
+  alert("Copied!");
 }
 
 function downloadM3U() {
@@ -98,6 +100,6 @@ function downloadM3U() {
   const blob = new Blob([text], { type: "audio/x-mpegurl" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "technology-sr.m3u";
+  a.download = "TechnologySR.m3u";
   a.click();
 }
