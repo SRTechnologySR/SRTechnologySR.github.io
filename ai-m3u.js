@@ -117,3 +117,53 @@ function downloadM3U() {
   a.download = "technology-sr.m3u";
   a.click();
 }
+
+function generateToken() {
+  return "TSR-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+}
+
+function generateBill() {
+
+  const selectedChannels = document.querySelectorAll(
+    '#channelList input[type="checkbox"]:checked'
+  );
+
+  if (selectedChannels.length === 0) {
+    alert("Please select at least 1 channel");
+    return;
+  }
+
+  const token = generateToken();
+
+  let channelNames = "";
+  selectedChannels.forEach(cb => {
+    channelNames += "• " + cb.dataset.name + "\n";
+  });
+
+  const billText = `
+=========== TECHNOLOGY SR ===========
+
+Invoice Type : IPTV Playlist
+Status       : PAID
+
+------------------------------------
+
+Channels Selected : ${selectedChannels.length}
+
+Selected Channels:
+${channelNames}
+
+------------------------------------
+
+TOKEN : ${token}
+
+------------------------------------
+Send this token screenshot to
+Telegram Bot: t.me/TechnologySR_Bot
+to receive your playlist.
+
+====================================
+`;
+
+  alert(billText);
+}
