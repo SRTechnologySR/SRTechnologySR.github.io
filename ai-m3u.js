@@ -62,11 +62,12 @@ function renderChannels() {
       (category === "all" || ch.group === category)
     ) {
       const label = document.createElement("label");
-      label.className = "channel-item"; // ✅ FIXED LINE (IMPORTANT)
 
       label.innerHTML = `
         <span class="channel-name">${ch.name}</span>
-        <input type="checkbox" data-index="${i}" data-name="${ch.name}">
+        <input type="checkbox"
+          data-index="${i}"
+          data-name="${ch.name}">
       `;
 
       list.appendChild(label);
@@ -83,47 +84,15 @@ document
   .getElementById("category")
   .addEventListener("change", renderChannels);
 
-/* ===== GENERATE M3U ===== */
-function generateM3U() {
-  let out = "#EXTM3U\n";
-
-  document
-    .querySelectorAll('input[type="checkbox"]:checked')
-    .forEach(cb => {
-      const ch = channels[cb.dataset.index];
-      out += ch.info + "\n" + ch.url + "\n";
-    });
-
-  document.getElementById("output").value = out;
-}
-
-/* ===== COPY ===== */
-function copyM3U() {
-  const out = document.getElementById("output");
-  out.select();
-  document.execCommand("copy");
-  alert("M3U copied");
-}
-
-/* ===== DOWNLOAD ===== */
-function downloadM3U() {
-  const text = document.getElementById("output").value;
-  const blob = new Blob([text], {
-    type: "audio/x-mpegurl",
-  });
-
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "technology-sr.m3u";
-  a.click();
-}
-
+/* ===== TOKEN ===== */
 function generateToken() {
-  return "TSR-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+  return "TSR-" + Math.random().toString(36)
+    .substring(2, 10)
+    .toUpperCase();
 }
 
+/* ===== GENERATE BILL ===== */
 function generateBill() {
-
   const selectedChannels = document.querySelectorAll(
     '#channelList input[type="checkbox"]:checked'
   );
@@ -135,11 +104,19 @@ function generateBill() {
 
   const token = generateToken();
 
-  let channelNames = "";
+  /* 🔥 ADMIN LOG (IMPORTANT PART) */
+  console.log("========== NEW REQUEST ==========");
+  console.log("TOKEN:", token);
+  console.log("TOTAL CHANNELS:", selectedChannels.length);
+  console.log("SELECTED CHANNELS:");
+
   selectedChannels.forEach(cb => {
-    channelNames += "• " + cb.dataset.name + "\n";
+    console.log("-", cb.dataset.name);
   });
 
+  console.log("=================================");
+
+  /* USER BILL (CLEAN) */
   const billText = `
 =========== TECHNOLOGY SR ===========
 
@@ -150,17 +127,14 @@ Status       : PAID
 
 Channels Selected : ${selectedChannels.length}
 
-Selected Channels:
-${channelNames}
-
 ------------------------------------
 
 TOKEN : ${token}
 
 ------------------------------------
 Send this token screenshot to
-Telegram Bot: t.me/TechnologySR_Bot
-to receive your playlist.
+Telegram Bot:
+t.me/TechnologySR_Bot
 
 ====================================
 `;
