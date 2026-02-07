@@ -108,3 +108,19 @@ textarea {
   height: 90px;
   resize: none;
 }
+
+/* ===== Channel list layout fix ===== */
+#channelList label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 6px;
+}
+
+.channel-name {
+  flex: 1;
+}
+
+#channelList input[type="checkbox"] {
+  transform: scale(1.2);
+}
