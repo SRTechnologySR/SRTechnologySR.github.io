@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Technology SR • AI M3U Builder</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI M3U Generator – Technology SR</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="ai-page">
+<body>
 
+  <!-- 🔔 DESKTOP MODE NOTICE -->
   <div class="desktop-notice">
-  ⚠️ For best experience, please enable <b>Desktop site</b> in your browser.
+    ⚠️ For best experience, please enable <b>Desktop site</b> in your browser
   </div>
-  
-  <!-- NAV -->
-  <nav class="top-nav">
-    <a href="index.html">Home</a>
-    <a href="explore.html">Explore</a>
-    <a href="ai-m3u.html" class="active">Tools</a>
-  </nav>
 
-  <!-- MAIN -->
-  <main class="ai-container">
-    <h1>Technology SR</h1>
-    <p class="subtitle">Create your own M3U playlist using AI-style selector</p>
+  <div class="center">
 
-    <div class="controls">
-      <input type="text" id="search" placeholder="Search channel...">
+    <h1 class="neon">Technology SR</h1>
+    <p class="tagline">
+      AI-based M3U Playlist Generator
+    </p>
 
-      <select id="category">
-        <option value="all">All Categories</option>
-      </select>
-    </div>
+    <!-- SEARCH -->
+    <input
+      type="text"
+      id="search"
+      placeholder="Search channel..."
+    />
 
-    <div id="status">Loading playlist…</div>
+    <!-- CATEGORY -->
+    <select id="category">
+      <option value="all">All Categories</option>
+    </select>
 
-    <div id="channelList" class="channel-list"></div>
+    <!-- STATUS -->
+    <div id="status">Loading playlist...</div>
 
-    <div class="actions">
-      <button onclick="generateM3U()">Generate M3U</button>
-      <button onclick="copyM3U()">Copy</button>
-      <button onclick="downloadM3U()">Download</button>
-    </div>
+    <!-- CHANNEL LIST -->
+    <div id="channelList"></div>
 
-    <textarea id="output" placeholder="Your generated M3U playlist will appear here"></textarea>
-  </main>
+    <!-- ACTION BUTTONS -->
+    <button class="btn big" onclick="generateM3U()">
+      Generate M3U
+    </button>
 
+    <textarea
+      id="output"
+      placeholder="Your generated M3U will appear here"
+    ></textarea>
+
+    <button class="btn" onclick="copyM3U()">Copy</button>
+    <button class="btn" onclick="downloadM3U()">Download</button>
+
+  </div>
+
+  <!-- JS -->
   <script src="ai-m3u.js"></script>
 </body>
 </html>
