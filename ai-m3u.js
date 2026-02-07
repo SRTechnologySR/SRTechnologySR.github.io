@@ -62,8 +62,8 @@ function renderChannels() {
       (category === "all" || ch.group === category)
     ) {
       const label = document.createElement("label");
+      label.className = "channel-item"; // ✅ FIXED LINE (IMPORTANT)
 
-      // 👇 NAME LEFT, CHECKBOX RIGHT
       label.innerHTML = `
         <span class="channel-name">${ch.name}</span>
         <input type="checkbox" data-index="${i}">
@@ -116,4 +116,4 @@ function downloadM3U() {
   a.href = URL.createObjectURL(blob);
   a.download = "technology-sr.m3u";
   a.click();
-        }
+}
