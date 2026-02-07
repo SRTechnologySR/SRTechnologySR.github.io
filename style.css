@@ -109,18 +109,30 @@ textarea {
   resize: none;
 }
 
-/* ===== Channel list layout fix ===== */
-#channelList label {
+/* Channel row fix */
+#channelList {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.channel-item {
+  display: flex;
   align-items: center;
-  padding: 8px 6px;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
 }
 
 .channel-name {
-  flex: 1;
+  color: #00ffee;
+  font-size: 15px;
+  line-height: 1.4;
+  max-width: 85%;
 }
 
-#channelList input[type="checkbox"] {
-  transform: scale(1.2);
+.channel-item input[type="checkbox"] {
+  transform: scale(1.3);
+  flex-shrink: 0;
 }
