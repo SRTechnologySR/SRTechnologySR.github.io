@@ -1,3 +1,8 @@
+/* FORCE DESKTOP LAYOUT ON MOBILE */
+html, body {
+  min-width: 1200px;
+}
+
 /* ===== RESET & BASE ===== */
 * {
   box-sizing: border-box;
