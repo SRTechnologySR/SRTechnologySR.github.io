@@ -66,7 +66,7 @@ function renderChannels() {
 
       label.innerHTML = `
         <span class="channel-name">${ch.name}</span>
-        <input type="checkbox" data-index="${i}">
+        <input type="checkbox" data-index="${i}" data-name="${ch.name}">
       `;
 
       list.appendChild(label);
