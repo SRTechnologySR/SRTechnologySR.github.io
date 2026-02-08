@@ -3,17 +3,15 @@
 ================================ */
 const M3U_URL = "index.m3u";
 
-/* 🔴 GOOGLE FORM DETAILS (CHANGE THIS) */
+/* 🔴 GOOGLE FORM DETAILS (FIXED & WORKING) */
 const GOOGLE_FORM_URL =
-  "https://docs.google.com/forms/d/e/FORM_ID/formResponse";
+"https://docs.google.com/forms/d/e/1FAIpQLSfz6OqFZ3ruclRcO7dnqPDK6rRaxlRrUDTF-BAjWeYRx1BcKQ/formResponse";
 
-const ENTRY_TOKEN = "entry.1234567890";
-const ENTRY_COUNT = "entry.9876543210";
-const ENTRY_CHANNELS = "entry.5555555555";
+/* ENTRY NUMBERS (FROM YOUR FILE) */
+const ENTRY_TOKEN    = "entry.2028510034";
+const ENTRY_COUNT    = "entry.1710769037";
+const ENTRY_CHANNELS = "entry.1416189612";
 
-/* ===============================
-   GLOBALS
-================================ */
 let channels = [];
 
 /* ===============================
@@ -48,12 +46,11 @@ function parseM3U(text) {
       const group =
         (info.match(/group-title="([^"]*)"/) || ["", "Other"])[1];
 
-      channels.push({ info, url, name, group });
+      channels.push({ name, group });
       categories.add(group);
     }
   }
 
-  /* CATEGORY DROPDOWN */
   const catSel = document.getElementById("category");
   categories.forEach(c => {
     const o = document.createElement("option");
@@ -66,7 +63,7 @@ function parseM3U(text) {
 }
 
 /* ===============================
-   RENDER CHANNELS
+   RENDER
 ================================ */
 function renderChannels() {
   const list = document.getElementById("channelList");
@@ -93,11 +90,8 @@ function renderChannels() {
 /* ===============================
    EVENTS
 ================================ */
-document.getElementById("search")
-  .addEventListener("input", renderChannels);
-
-document.getElementById("category")
-  .addEventListener("change", renderChannels);
+document.getElementById("search").addEventListener("input", renderChannels);
+document.getElementById("category").addEventListener("change", renderChannels);
 
 /* ===============================
    TOKEN
@@ -109,33 +103,29 @@ function generateToken() {
 }
 
 /* ===============================
-   GENERATE + GOOGLE FORM SUBMIT
+   GENERATE + SUBMIT
 ================================ */
 function generateBill() {
+
   const checked = document.querySelectorAll(
-    '#channelList input[type="checkbox"]:checked'
+    "#channelList input[type='checkbox']:checked"
   );
 
   if (checked.length === 0) {
-    alert("Please select at least 1 channel");
+    alert("❌ Please select at least 1 channel");
     return;
   }
 
   const token = generateToken();
   const count = checked.length;
 
-  let channelNames = [];
-  checked.forEach(ch => {
-    channelNames.push(ch.dataset.name);
-  });
+  const channelNames = [];
+  checked.forEach(c => channelNames.push(c.dataset.name));
 
-  const channelList = channelNames.join(", ");
-
-  /* GOOGLE FORM SUBMIT */
   const formData = new FormData();
   formData.append(ENTRY_TOKEN, token);
   formData.append(ENTRY_COUNT, count);
-  formData.append(ENTRY_CHANNELS, channelList);
+  formData.append(ENTRY_CHANNELS, channelNames.join(", "));
 
   fetch(GOOGLE_FORM_URL, {
     method: "POST",
@@ -143,16 +133,14 @@ function generateBill() {
     body: formData
   });
 
-  /* USER MESSAGE */
-  alert(`
-=========== TECHNOLOGY SR ===========
+  alert(
+`=========== TECHNOLOGY SR ===========
 
 Channels Selected : ${count}
-
 TOKEN : ${token}
 
-✔ Token saved successfully
+✔ Data sent to Google Form
 Send token screenshot to:
-t.me/TechnologySR_Bot
-`);
+t.me/TechnologySR_Bot`
+  );
 }
