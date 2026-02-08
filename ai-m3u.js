@@ -137,10 +137,18 @@ function generateBill() {
 `=========== TECHNOLOGY SR ===========
 
 Channels Selected : ${count}
+
 TOKEN : ${token}
 
-✔ Data sent to Google Form
-Send token screenshot to:
-t.me/TechnologySR_Bot`
-  );
-}
+------------------------------------
+
+📸 Take a screenshot of this page
+and send it to our Telegram Bot:
+
+@TechnologySR_Bot
+
+OR paste this in your browser:
+t.me/TechnologySR_Bot
+
+====================================`
+);
