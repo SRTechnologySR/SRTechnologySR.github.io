@@ -1,7 +1,9 @@
+/* ===== RESET ===== */
 * {
   box-sizing: border-box;
 }
 
+/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -15,6 +17,7 @@ body {
   padding-bottom: 140px;
 }
 
+/* ===== DESKTOP NOTICE ===== */
 .desktop-notice {
   background: rgba(0,0,0,0.8);
   color: #ffcc00;
@@ -23,6 +26,7 @@ body {
   font-size: 13px;
 }
 
+/* ===== CENTER ===== */
 .center {
   min-height: 100vh;
   display: flex;
@@ -32,6 +36,7 @@ body {
   padding: 20px;
 }
 
+/* ===== TITLE ===== */
 .neon {
   font-size: 2.3em;
   text-align: center;
@@ -47,11 +52,11 @@ body {
   text-align: center;
 }
 
+/* ===== BUTTON ===== */
 .btn {
   padding: 14px 25px;
   border: 2px solid #00ffcc;
   color: #00ffcc;
-  text-decoration: none;
   border-radius: 30px;
   background: transparent;
   box-shadow: 0 0 15px #00ffcc;
@@ -65,6 +70,7 @@ body {
   font-size: 1.2em;
 }
 
+/* ===== INPUTS (IMPORTANT) ===== */
 input,
 select,
 textarea {
@@ -78,6 +84,7 @@ textarea {
   outline: none;
 }
 
+/* ===== STATUS ===== */
 #status {
   font-size: 13px;
   color: #aaa;
@@ -92,23 +99,31 @@ textarea {
   gap: 10px;
 }
 
+/* CHANNEL ROW */
 #channelList label {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding: 10px 12px;
   background: rgba(0,0,0,0.55);
   border-radius: 10px;
 }
 
+/* CHANNEL NAME (JS UNCHANGED) */
+#channelList label span,
 .channel-name {
   flex: 1;
   color: #00ffee;
   font-size: 15px;
   line-height: 1.4;
+
+  /* 🔥 MAIN FIX */
+  white-space: normal;
+  word-break: break-word;
 }
 
-/* 🔥 CHECKBOX FINAL HARD FIX */
+/* ===== CHECKBOX HARD FIX (ROOT CAUSE SOLVED) ===== */
 #channelList input[type="checkbox"] {
   width: auto !important;
   max-width: none !important;
