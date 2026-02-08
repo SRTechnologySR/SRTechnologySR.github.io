@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI M3U Admin – Technology SR</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 🔐 ADMIN CHECK -->
+<script>
+  if (
+    localStorage.getItem("auth") !== "yes" ||
+    localStorage.getItem("role") !== "admin"
+  ) {
+    alert("❌ Admin access only");
+    window.location.href = "index.html";
+  }
+</script>
+
+<div class="center">
+  <h1 class="neon">AI M3U Generator</h1>
+  <p class="tagline">ADMIN MODE – Direct Playlist</p>
+
+  <input type="text" id="search" placeholder="Search channel">
+
+  <select id="category">
+    <option value="all">All Categories</option>
+  </select>
+
+  <div id="status">Loading playlist...</div>
+
+  <div id="channelList"></div>
+
+  <button class="btn big" onclick="generateM3U()">
+    Generate Playlist
+  </button>
+
+  <textarea id="output" placeholder="Generated M3U"></textarea>
+
+  <button class="btn" onclick="copyM3U()">Copy</button>
+  <button class="btn" onclick="downloadM3U()">Download</button>
+
+  <a href="tools-admin.html" class="btn back">
+    ⬅ Back
+  </a>
+</div>
+
+<script src="ai-m3u-admin.js"></script>
+
+</body>
+</html>
