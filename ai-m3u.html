@@ -12,22 +12,16 @@
 
   <!-- 🔔 DESKTOP MODE NOTICE -->
   <div class="desktop-notice">
-    ⚠️ For best experience, please enable <b>Desktop site</b> in your browser
+    ⚠️ For best experience, please enable <b>Desktop site</b>
   </div>
 
   <div class="center">
 
     <h1 class="neon">Technology SR</h1>
-    <p class="tagline">
-      AI-based M3U Playlist Generator
-    </p>
+    <p class="tagline">AI-based M3U Playlist Generator</p>
 
     <!-- SEARCH -->
-    <input
-      type="text"
-      id="search"
-      placeholder="Search channel..."
-    />
+    <input type="text" id="search" placeholder="Search channel..." />
 
     <!-- CATEGORY -->
     <select id="category">
@@ -40,12 +34,15 @@
     <!-- CHANNEL LIST -->
     <div id="channelList"></div>
 
-    <!-- ACTION BUTTONS -->
+    <!-- GENERATE BUTTON (BOTTOM AREA) -->
     <button class="btn big" onclick="generateBill()">
       Generate M3U
     </button>
 
   </div>
+
+  <!-- 🔽 FLOATING GO TO BOTTOM -->
+  <button id="goBottomBtn" onclick="goToBottom()">⬇ Generate</button>
 
   <!-- JS -->
   <script src="ai-m3u.js"></script>
