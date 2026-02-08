@@ -158,3 +158,50 @@ textarea {
   transform: scale(1.3);
   flex-shrink: 0;
 }
+
+/* ===============================
+   🔥 NUCLEAR CHANNEL LIST FIX
+   =============================== */
+
+/* STOP ANY VERTICAL / COLUMN TEXT */
+#channelList,
+#channelList * {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  transform: none !important;
+}
+
+/* FORCE ROW LAYOUT */
+#channelList label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  width: 100% !important;
+  max-width: 360px !important;
+
+  padding: 10px 12px !important;
+  background: rgba(0,0,0,0.55) !important;
+  border-radius: 10px !important;
+}
+
+/* FORCE CHANNEL NAME NORMAL */
+.channel-name {
+  display: block !important;
+  flex: 1 !important;
+
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  color: #00ffee !important;
+
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+/* FORCE CHECKBOX RIGHT */
+#channelList input[type="checkbox"] {
+  margin-left: 10px !important;
+  transform: scale(1.3) !important;
+  flex-shrink: 0 !important;
+}
