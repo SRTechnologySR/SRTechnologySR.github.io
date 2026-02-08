@@ -1,16 +1,39 @@
+/* ===============================
+   CONFIG
+================================ */
 const M3U_URL = "index.m3u";
+
+/* 🔴 GOOGLE FORM DETAILS (CHANGE THIS) */
+const GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/FORM_ID/formResponse";
+
+const ENTRY_TOKEN = "entry.1234567890";
+const ENTRY_COUNT = "entry.9876543210";
+const ENTRY_CHANNELS = "entry.5555555555";
+
+/* ===============================
+   GLOBALS
+================================ */
 let channels = [];
 
-/* LOAD M3U */
+/* ===============================
+   LOAD M3U
+================================ */
 fetch(M3U_URL)
   .then(res => res.text())
   .then(text => {
     parseM3U(text);
     document.getElementById("status").innerText =
       `Loaded ${channels.length} channels`;
+  })
+  .catch(() => {
+    document.getElementById("status").innerText =
+      "Failed to load playlist";
   });
 
-/* PARSE */
+/* ===============================
+   PARSE M3U
+================================ */
 function parseM3U(text) {
   const lines = text.split(/\r?\n/);
   const categories = new Set();
@@ -23,13 +46,14 @@ function parseM3U(text) {
 
       const name = info.split(",").pop().trim();
       const group =
-        (info.match(/group-title="([^"]*)"/) || ["","Other"])[1];
+        (info.match(/group-title="([^"]*)"/) || ["", "Other"])[1];
 
       channels.push({ info, url, name, group });
       categories.add(group);
     }
   }
 
+  /* CATEGORY DROPDOWN */
   const catSel = document.getElementById("category");
   categories.forEach(c => {
     const o = document.createElement("option");
@@ -41,7 +65,9 @@ function parseM3U(text) {
   renderChannels();
 }
 
-/* RENDER */
+/* ===============================
+   RENDER CHANNELS
+================================ */
 function renderChannels() {
   const list = document.getElementById("channelList");
   const search = document.getElementById("search").value.toLowerCase();
@@ -49,7 +75,7 @@ function renderChannels() {
 
   list.innerHTML = "";
 
-  channels.forEach((ch, i) => {
+  channels.forEach(ch => {
     if (
       ch.name.toLowerCase().includes(search) &&
       (cat === "all" || ch.group === cat)
@@ -64,16 +90,27 @@ function renderChannels() {
   });
 }
 
-/* EVENTS */
-document.getElementById("search").addEventListener("input", renderChannels);
-document.getElementById("category").addEventListener("change", renderChannels);
+/* ===============================
+   EVENTS
+================================ */
+document.getElementById("search")
+  .addEventListener("input", renderChannels);
 
-/* TOKEN */
+document.getElementById("category")
+  .addEventListener("change", renderChannels);
+
+/* ===============================
+   TOKEN
+================================ */
 function generateToken() {
-  return "TSR-" + Math.random().toString(36).substring(2,10).toUpperCase();
+  return "TSR-" + Math.random().toString(36)
+    .substring(2, 10)
+    .toUpperCase();
 }
 
-/* GENERATE */
+/* ===============================
+   GENERATE + GOOGLE FORM SUBMIT
+================================ */
 function generateBill() {
   const checked = document.querySelectorAll(
     '#channelList input[type="checkbox"]:checked'
@@ -85,14 +122,37 @@ function generateBill() {
   }
 
   const token = generateToken();
+  const count = checked.length;
 
+  let channelNames = [];
+  checked.forEach(ch => {
+    channelNames.push(ch.dataset.name);
+  });
+
+  const channelList = channelNames.join(", ");
+
+  /* GOOGLE FORM SUBMIT */
+  const formData = new FormData();
+  formData.append(ENTRY_TOKEN, token);
+  formData.append(ENTRY_COUNT, count);
+  formData.append(ENTRY_CHANNELS, channelList);
+
+  fetch(GOOGLE_FORM_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  });
+
+  /* USER MESSAGE */
   alert(`
 =========== TECHNOLOGY SR ===========
 
-Channels Selected : ${checked.length}
+Channels Selected : ${count}
 
 TOKEN : ${token}
 
+✔ Token saved successfully
 Send token screenshot to:
 t.me/TechnologySR_Bot
-  `);
+`);
+}
