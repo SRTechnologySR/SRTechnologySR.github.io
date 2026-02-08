@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Tools – Technology SR</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 🔐 ADMIN CHECK -->
+<script>
+  if (
+    localStorage.getItem("auth") !== "yes" ||
+    localStorage.getItem("role") !== "admin"
+  ) {
+    alert("❌ Admin access only");
+    window.location.href = "index.html";
+  }
+</script>
+
+<div class="center">
+  <h1 class="neon">Admin Tools</h1>
+  <p class="tagline">Internal Tools – Admin Only</p>
+
+  <a href="ai-m3u-admin.html" class="btn big">
+    🤖 AI M3U Admin
+  </a>
+
+  <a href="explore-admin.html" class="btn back">
+    ⬅ Back
+  </a>
+</div>
+
+</body>
+</html>
