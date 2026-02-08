@@ -179,3 +179,14 @@ textarea {
   opacity: 0;
   pointer-events: none;
 }
+
+/* 🔥 FORCE FLOATING BUTTON VISIBLE */
+#goBottomBtn {
+  position: fixed !important;
+  right: 12px !important;
+  bottom: 20px !important;   /* ⬅️ niche lao */
+  z-index: 99999 !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
