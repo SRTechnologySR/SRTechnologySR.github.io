@@ -1,10 +1,5 @@
-/* ===== RESET & BASE ===== */
 * {
   box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
 }
 
 body {
@@ -12,14 +7,14 @@ body {
   font-family: Arial, sans-serif;
   color: #00ffcc;
 
-  /* BACKGROUND */
-  background: 
+  background:
     linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
     url("technology-sr-bg.png") no-repeat center center fixed;
   background-size: cover;
+
+  padding-bottom: 140px;
 }
 
-/* ===== DESKTOP NOTICE ===== */
 .desktop-notice {
   background: rgba(0,0,0,0.8);
   color: #ffcc00;
@@ -28,7 +23,6 @@ body {
   font-size: 13px;
 }
 
-/* ===== CENTER LAYOUT ===== */
 .center {
   min-height: 100vh;
   display: flex;
@@ -38,7 +32,6 @@ body {
   padding: 20px;
 }
 
-/* ===== NEON TITLE ===== */
 .neon {
   font-size: 2.3em;
   text-align: center;
@@ -48,14 +41,12 @@ body {
     0 0 30px #00ffcc;
 }
 
-/* ===== TAGLINE ===== */
 .tagline {
   font-size: 0.9em;
   color: #aaa;
   text-align: center;
 }
 
-/* ===== BUTTONS ===== */
 .btn {
   padding: 14px 25px;
   border: 2px solid #00ffcc;
@@ -68,20 +59,12 @@ body {
   width: 100%;
   max-width: 320px;
   text-align: center;
-  transition: 0.3s ease;
 }
 
-.btn:hover {
-  background: #00ffcc;
-  color: #000;
-}
-
-/* ===== BIG BUTTON ===== */
 .big {
   font-size: 1.2em;
 }
 
-/* ===== INPUTS ===== */
 input,
 select,
 textarea {
@@ -95,19 +78,12 @@ textarea {
   outline: none;
 }
 
-/* ===== TEXTAREA ===== */
-textarea {
-  height: 90px;
-  resize: none;
-}
-
-/* ===== STATUS ===== */
 #status {
   font-size: 13px;
   color: #aaa;
 }
 
-/* ===== CHANNEL LIST FIXED ===== */
+/* ===== CHANNEL LIST ===== */
 #channelList {
   width: 100%;
   max-width: 360px;
@@ -116,33 +92,28 @@ textarea {
   gap: 10px;
 }
 
-/* EACH ROW */
 #channelList label {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
   padding: 10px 12px;
   background: rgba(0,0,0,0.55);
   border-radius: 10px;
 }
 
-/* CHANNEL NAME — FORCE HORIZONTAL */
 .channel-name {
+  flex: 1;
   color: #00ffee;
   font-size: 15px;
   line-height: 1.4;
-
-  flex: 1;
-  white-space: nowrap;        /* 🔑 THIS FIXES VERTICAL TEXT */
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-/* CHECKBOX — RIGHT SIDE FIX */
+/* 🔥 CHECKBOX FINAL HARD FIX */
 #channelList input[type="checkbox"] {
-  transform: scale(1.3);
+  width: auto !important;
+  max-width: none !important;
+  padding: 0 !important;
   margin-left: 12px;
+  transform: scale(1.3);
   flex-shrink: 0;
 }
