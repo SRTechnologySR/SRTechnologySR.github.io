@@ -96,25 +96,3 @@ TOKEN : ${token}
 Send token screenshot to:
 t.me/TechnologySR_Bot
   `);
-
-  // auto scroll bottom
-  goToBottom();
-}
-
-/* GO TO BOTTOM */
-function goToBottom() {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
-  });
-}
-
-/* HIDE FLOAT BUTTON WHEN BOTTOM */
-window.addEventListener("scroll", () => {
-  const btn = document.getElementById("goBottomBtn");
-  if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 200) {
-    btn.classList.add("hidden");
-  } else {
-    btn.classList.remove("hidden");
-  }
-});
