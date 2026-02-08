@@ -5,16 +5,37 @@
   <title>Admin Explore – Technology SR</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+<!-- 🔐 ADMIN CHECK -->
+<script>
+  if (
+    localStorage.getItem("auth") !== "yes" ||
+    localStorage.getItem("role") !== "admin"
+  ) {
+    alert("❌ Admin access only");
+    window.location.href = "index.html";
+  }
+</script>
 
 <div class="center">
   <h1 class="neon">Admin Explore</h1>
-  <p class="tagline">Technology SR – Admin Area</p>
+  <p class="tagline">Technology SR – Admin Panel</p>
 
   <a href="tools-admin.html" class="btn big">
     🧰 Admin Tools
   </a>
+
+  <button class="btn back" onclick="logout()">Logout</button>
 </div>
+
+<script>
+  function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+  }
+</script>
 
 </body>
 </html>
