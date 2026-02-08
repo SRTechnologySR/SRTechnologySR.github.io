@@ -17,9 +17,6 @@ body {
     linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
     url("technology-sr-bg.png") no-repeat center center fixed;
   background-size: cover;
-
-  /* space for floating button */
-  padding-bottom: 140px;
 }
 
 /* ===== DESKTOP NOTICE ===== */
