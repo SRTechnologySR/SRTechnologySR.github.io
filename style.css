@@ -13,7 +13,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  padding-bottom: 140px;
 }
 
 /* ===== DARK OVERLAY ===== */
@@ -25,6 +24,7 @@ body::before {
   z-index: -1;
 }
 
+/* ===== KEEP CONTENT ABOVE OVERLAY ===== */
 body > * {
   position: relative;
   z-index: 1;
@@ -39,7 +39,7 @@ body > * {
   font-size: 13px;
 }
 
-/* ===== CENTER ===== */
+/* ===== CENTER LAYOUT ===== */
 .center {
   min-height: 100vh;
   display: flex;
@@ -49,19 +49,52 @@ body > * {
   padding: 20px;
 }
 
-/* ===== TITLE ===== */
+/* ===== NEON TITLE ===== */
 .neon {
   font-size: 2.3em;
-  text-shadow: 0 0 15px #00ffcc;
+  text-align: center;
+  text-shadow:
+    0 0 5px #00ffcc,
+    0 0 15px #00ffcc,
+    0 0 30px #00ffcc;
 }
 
+/* ===== TAGLINE ===== */
 .tagline {
   font-size: 0.9em;
   color: #aaa;
+  text-align: center;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  padding: 14px 25px;
+  border: 2px solid #00ffcc;
+  color: #00ffcc;
+  border-radius: 30px;
+  background: transparent;
+  box-shadow: 0 0 15px #00ffcc;
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background: #00ffcc;
+  color: #000;
+}
+
+/* ===== BIG BUTTON ===== */
+.big {
+  font-size: 1.2em;
 }
 
 /* ===== INPUTS ===== */
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
   max-width: 320px;
   background: #000;
@@ -69,6 +102,13 @@ input, select, textarea {
   color: #00ffcc;
   padding: 10px;
   border-radius: 10px;
+  outline: none;
+}
+
+/* ===== TEXTAREA ===== */
+textarea {
+  height: 90px;
+  resize: none;
 }
 
 /* ===== STATUS ===== */
@@ -77,7 +117,7 @@ input, select, textarea {
   color: #aaa;
 }
 
-/* ===== CHANNEL LIST ===== */
+/* ===== CHANNEL LIST (LAST WORKING) ===== */
 #channelList {
   width: 100%;
   max-width: 360px;
@@ -86,41 +126,28 @@ input, select, textarea {
   gap: 12px;
 }
 
+/* JS USES <label> */
 #channelList label {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.45);
+  justify-content: space-between;
   padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.45);
   border-radius: 10px;
   gap: 10px;
 }
 
+/* CHANNEL NAME */
 .channel-name {
-  flex: 1;
+  color: #00ffee;
   font-size: 15px;
   line-height: 1.4;
+  flex: 1;
   word-break: break-word;
 }
 
-/* ===== CHECKBOX ===== */
+/* CHECKBOX */
 #channelList input[type="checkbox"] {
   transform: scale(1.3);
-}
-
-/* ===== FLOATING GENERATE BUTTON ===== */
-#goBottomBtn {
-  position: fixed;
-  right: 16px;
-  bottom: 20px;
-  background: #00ffcc;
-  color: #000;
-  border: none;
-  border-radius: 40px;
-  padding: 14px 20px;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 0 0 20px #00ffcc;
-  cursor: pointer;
-  z-index: 99999;
-}
+  flex-shrink: 0;
+  }
