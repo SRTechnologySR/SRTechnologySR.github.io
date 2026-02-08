@@ -3,91 +3,86 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: #00ffcc;
-  background: #000;
-  padding-bottom: 120px;
+  background-color: #000;
+  background-image: url("technology-sr-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* space for floating buttons */
+  padding-bottom: 140px;
 }
 
-/* DESKTOP NOTICE */
+/* ===== DARK OVERLAY ===== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: -1;
+}
+
+/* ===== KEEP CONTENT ABOVE OVERLAY ===== */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== DESKTOP NOTICE ===== */
 .desktop-notice {
-  background: #111;
+  background: rgba(0,0,0,0.8);
   color: #ffcc00;
   text-align: center;
   padding: 8px;
   font-size: 13px;
 }
 
-/* CENTER LAYOUT */
+/* ===== CENTER LAYOUT ===== */
 .center {
   min-height: 100vh;
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  justify-content: flex-start;
   align-items: center;
+  gap: 15px;
+  padding: 20px;
 }
 
-/* TITLE */
+/* ===== NEON TITLE ===== */
 .neon {
-  font-size: 2.2em;
-  text-shadow: 0 0 10px #00ffcc;
+  font-size: 2.3em;
+  text-align: center;
+  text-shadow:
+    0 0 5px #00ffcc,
+    0 0 15px #00ffcc,
+    0 0 30px #00ffcc;
 }
 
-/* TAGLINE */
+/* ===== TAGLINE ===== */
 .tagline {
   font-size: 0.9em;
   color: #aaa;
+  text-align: center;
 }
 
-/* INPUTS */
-input,
-select {
-  width: 100%;
-  max-width: 340px;
-  padding: 10px;
-  background: #000;
-  border: 2px solid #00ffcc;
-  color: #00ffcc;
-  border-radius: 10px;
-}
-
-/* STATUS */
-#status {
-  font-size: 13px;
-  color: #aaa;
-}
-
-/* CHANNEL LIST */
-#channelList {
-  width: 100%;
-  max-width: 340px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* CHANNEL ROW */
-#channelList label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0,0,0,0.6);
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.channel-name {
-  font-size: 14px;
-}
-
-/* BUTTON */
+/* ===== BUTTONS ===== */
 .btn {
-  padding: 14px 24px;
+  padding: 14px 25px;
   border: 2px solid #00ffcc;
-  background: transparent;
   color: #00ffcc;
+  text-decoration: none;
   border-radius: 30px;
-  font-size: 16px;
+  background: transparent;
+  box-shadow: 0 0 15px #00ffcc;
   cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  transition: 0.3s ease;
 }
 
 .btn:hover {
@@ -95,11 +90,75 @@ select {
   color: #000;
 }
 
-/* 🔽 FLOATING BUTTON */
+/* ===== BIG BUTTON ===== */
+.big {
+  font-size: 1.2em;
+}
+
+/* ===== INPUTS ===== */
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 320px;
+  background: #000;
+  border: 2px solid #00ffcc;
+  color: #00ffcc;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+}
+
+/* ===== TEXTAREA ===== */
+textarea {
+  height: 90px;
+  resize: none;
+}
+
+/* ===== STATUS TEXT ===== */
+#status {
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* ===== CHANNEL LIST ===== */
+#channelList {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== CHANNEL ROW ===== */
+#channelList label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 10px;
+}
+
+/* CHANNEL NAME */
+.channel-name {
+  color: #00ffee;
+  font-size: 15px;
+  line-height: 1.4;
+  max-width: 85%;
+}
+
+/* CHECKBOX */
+#channelList input[type="checkbox"] {
+  transform: scale(1.3);
+  flex-shrink: 0;
+}
+
+/* ===== FLOATING GO TO BOTTOM BUTTON ===== */
 #goBottomBtn {
   position: fixed;
   right: 16px;
-  bottom: 90px;
+  bottom: 100px;
   background: #00ffcc;
   color: #000;
   border: none;
@@ -110,9 +169,15 @@ select {
   box-shadow: 0 0 15px #00ffcc;
   cursor: pointer;
   z-index: 9999;
+  transition: 0.3s ease;
 }
 
+#goBottomBtn:hover {
+  background: #00e6b8;
+}
+
+/* HIDE WHEN AT BOTTOM */
 #goBottomBtn.hidden {
   opacity: 0;
   pointer-events: none;
-}
+  }
