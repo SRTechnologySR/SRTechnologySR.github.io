@@ -19,8 +19,26 @@
   <h1 class="neon">Technology SR</h1>
   <p class="tagline">IPTV • M3U • Xtream • Stalker • MAC Portal</p>
 
+  <!-- NORMAL USER BUTTON -->
   <a href="explore.html" class="btn big">EXPLORE</a>
+
+  <!-- 👑 ADMIN ONLY BUTTON (HIDDEN BY DEFAULT) -->
+  <a href="explore-admin.html"
+     id="adminBtn"
+     class="btn big admin-btn"
+     style="display:none;">
+     👑 ADMIN EXPLORE
+  </a>
 </div>
+
+<!-- 🔐 ROLE CHECK SCRIPT -->
+<script>
+  const role = localStorage.getItem("role");
+
+  if (role === "admin") {
+    document.getElementById("adminBtn").style.display = "inline-block";
+  }
+</script>
 
 </body>
 </html>
