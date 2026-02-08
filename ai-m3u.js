@@ -91,8 +91,9 @@ function generateToken() {
     .toUpperCase();
 }
 
-/* ===== GENERATE BILL ===== */
+/* ===== GENERATE BILL + GOOGLE FORM SUBMIT ===== */
 function generateBill() {
+
   const selectedChannels = document.querySelectorAll(
     '#channelList input[type="checkbox"]:checked'
   );
@@ -103,20 +104,29 @@ function generateBill() {
   }
 
   const token = generateToken();
+  const total = selectedChannels.length;
 
-  /* 🔥 ADMIN LOG (IMPORTANT PART) */
-  console.log("========== NEW REQUEST ==========");
-  console.log("TOKEN:", token);
-  console.log("TOTAL CHANNELS:", selectedChannels.length);
-  console.log("SELECTED CHANNELS:");
-
+  let channelNames = "";
   selectedChannels.forEach(cb => {
-    console.log("-", cb.dataset.name);
+    channelNames += cb.dataset.name + "\n";
   });
 
-  console.log("=================================");
+  /* 🔥 GOOGLE FORM AUTO SUBMIT */
+  const formURL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfz6OqFZ3ruclRcO7dnqPDK6rRaxlRrUDTF-BAjWeYRx1BcKQ/formResponse";
 
-  /* USER BILL (CLEAN) */
+  const data = new FormData();
+  data.append("entry.509343295", token);          // Token
+  data.append("entry.1938508613", total);         // Total Channels
+  data.append("entry.1647623468", channelNames);  // Channel List
+
+  fetch(formURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
+
+  /* 👤 USER BILL */
   const billText = `
 =========== TECHNOLOGY SR ===========
 
@@ -125,7 +135,7 @@ Status       : PAID
 
 ------------------------------------
 
-Channels Selected : ${selectedChannels.length}
+Channels Selected : ${total}
 
 ------------------------------------
 
@@ -140,4 +150,4 @@ t.me/TechnologySR_Bot
 `;
 
   alert(billText);
-}
+  }
