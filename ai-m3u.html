@@ -4,13 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI M3U Generator – Technology SR</title>
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- 🔔 DESKTOP MODE NOTICE -->
   <div class="desktop-notice">
     ⚠️ For best experience, please enable <b>Desktop site</b>
   </div>
@@ -20,28 +17,20 @@
     <h1 class="neon">Technology SR</h1>
     <p class="tagline">AI-based M3U Playlist Generator</p>
 
-    <!-- SEARCH -->
     <input type="text" id="search" placeholder="Search channel..." />
 
-    <!-- CATEGORY -->
     <select id="category">
       <option value="all">All Categories</option>
     </select>
 
-    <!-- STATUS -->
     <div id="status">Loading playlist...</div>
 
-    <!-- CHANNEL LIST -->
     <div id="channelList"></div>
 
-    <!-- GENERATE BUTTON (BOTTOM AREA) -->
-    <button class="btn big" onclick="generateBill()">
-      Generate M3U
-    </button>
+    <button class="btn big" onclick="generateBill()">Generate M3U</button>
 
   </div>
 
-  <!-- JS -->
   <script src="ai-m3u.js"></script>
 </body>
 </html>
