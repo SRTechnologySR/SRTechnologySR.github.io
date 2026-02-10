@@ -145,10 +145,10 @@ TOKEN : ${token}
 📸 Take a screenshot of this page
 and send it to our Telegram Bot:
 
-@TechnologySR_Bot
+@Technology_SR_Bot
 
 OR paste this in your browser:
-t.me/TechnologySR_Bot
+t.me/Technology_SR_Bot
 
 ====================================`
 );
