@@ -39,6 +39,14 @@ placeholder="Search channel..."
 Loading playlist...
 </div>
 
+<div class="controls">
+
+<button onclick="selectAll()">Select All</button>
+
+<button onclick="clearAll()">Clear All</button>
+
+</div>
+
 <div id="channelList"></div>
 
 <button
@@ -51,6 +59,24 @@ Generate M3U
 </div>
 
 <script src="ai-m3u.js"></script>
+
+<script>
+
+/* SELECT ALL */
+function selectAll(){
+document
+.querySelectorAll("#channelList input[type='checkbox']")
+.forEach(cb => cb.checked = true);
+}
+
+/* CLEAR ALL */
+function clearAll(){
+document
+.querySelectorAll("#channelList input[type='checkbox']")
+.forEach(cb => cb.checked = false);
+}
+
+</script>
 
 </body>
 </html>
