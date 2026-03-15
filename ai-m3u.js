@@ -3,15 +3,17 @@
 ================================ */
 const M3U_URL = "./index.m3u";
 
-/* 🔴 GOOGLE FORM DETAILS (FIXED & WORKING) */
+/* GOOGLE FORM */
 const GOOGLE_FORM_URL =
 "https://docs.google.com/forms/d/e/1FAIpQLSfz6OqFZ3ruclRcO7dnqPDK6rRaxlRrUDTF-BAjWeYRx1BcKQ/formResponse";
 
-/* ENTRY NUMBERS (FROM YOUR FILE) */
 const ENTRY_TOKEN    = "entry.2028510034";
 const ENTRY_COUNT    = "entry.1710769037";
 const ENTRY_CHANNELS = "entry.1416189612";
 
+/* ===============================
+   GLOBALS
+================================ */
 let channels = [];
 
 /* ===============================
@@ -22,9 +24,10 @@ fetch(M3U_URL)
   .then(text => {
     parseM3U(text);
     document.getElementById("status").innerText =
-      `Loaded ${channels.length} channels`;
+      "Loaded " + channels.length + " channels";
   })
-  .catch(() => {
+  .catch(err => {
+    console.error(err);
     document.getElementById("status").innerText =
       "Failed to load playlist";
   });
@@ -33,39 +36,52 @@ fetch(M3U_URL)
    PARSE M3U
 ================================ */
 function parseM3U(text) {
+
   const lines = text.split(/\r?\n/);
   const categories = new Set();
 
   for (let i = 0; i < lines.length; i++) {
-    if (lines[i].startsWith("#EXTINF")) {
-      const info = lines[i];
-      const url = lines[i + 1];
-      if (!url) continue;
 
-      const name = info.split(",").pop().trim();
-      const group =
-        (info.match(/group-title="([^"]*)"/) || ["", "Other"])[1];
+    const line = lines[i].trim();
 
-      channels.push({ name, group });
+    if (line.startsWith("#EXTINF")) {
+
+      const url = lines[i + 1] ? lines[i + 1].trim() : "";
+      if (!url || url.startsWith("#")) continue;
+
+      const name = line.split(",").pop().trim();
+
+      const groupMatch = line.match(/group-title="([^"]*)"/);
+      const group = groupMatch ? groupMatch[1] : "Other";
+
+      channels.push({
+        name: name,
+        group: group,
+        url: url
+      });
+
       categories.add(group);
     }
   }
 
+  /* CATEGORY LIST */
   const catSel = document.getElementById("category");
-  categories.forEach(c => {
-    const o = document.createElement("option");
-    o.value = c;
-    o.textContent = c;
-    catSel.appendChild(o);
+
+  categories.forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat;
+    catSel.appendChild(option);
   });
 
   renderChannels();
 }
 
 /* ===============================
-   RENDER
+   RENDER CHANNELS
 ================================ */
 function renderChannels() {
+
   const list = document.getElementById("channelList");
   const search = document.getElementById("search").value.toLowerCase();
   const cat = document.getElementById("category").value;
@@ -73,37 +89,49 @@ function renderChannels() {
   list.innerHTML = "";
 
   channels.forEach(ch => {
+
     if (
       ch.name.toLowerCase().includes(search) &&
       (cat === "all" || ch.group === cat)
     ) {
+
       const label = document.createElement("label");
+
       label.innerHTML = `
         <span class="channel-name">${ch.name}</span>
         <input type="checkbox" data-name="${ch.name}">
       `;
+
       list.appendChild(label);
     }
+
   });
+
 }
 
 /* ===============================
    EVENTS
 ================================ */
-document.getElementById("search").addEventListener("input", renderChannels);
-document.getElementById("category").addEventListener("change", renderChannels);
+document.getElementById("search")
+  .addEventListener("input", renderChannels);
+
+document.getElementById("category")
+  .addEventListener("change", renderChannels);
 
 /* ===============================
-   TOKEN
+   TOKEN GENERATOR
 ================================ */
 function generateToken() {
-  return "TSR-" + Math.random().toString(36)
-    .substring(2, 10)
-    .toUpperCase();
+
+  return "TSR-" +
+    Math.random()
+      .toString(36)
+      .substring(2, 10)
+      .toUpperCase();
 }
 
 /* ===============================
-   GENERATE + SUBMIT
+   GENERATE BILL
 ================================ */
 function generateBill() {
 
@@ -112,7 +140,7 @@ function generateBill() {
   );
 
   if (checked.length === 0) {
-    alert("❌ Please select at least 1 channel");
+    alert("Please select at least 1 channel");
     return;
   }
 
@@ -120,13 +148,18 @@ function generateBill() {
   const count = checked.length;
 
   const channelNames = [];
-  checked.forEach(c => channelNames.push(c.dataset.name));
+
+  checked.forEach(c => {
+    channelNames.push(c.dataset.name);
+  });
 
   const formData = new FormData();
+
   formData.append(ENTRY_TOKEN, token);
   formData.append(ENTRY_COUNT, count);
   formData.append(ENTRY_CHANNELS, channelNames.join(", "));
 
+  /* SEND TO GOOGLE FORM */
   fetch(GOOGLE_FORM_URL, {
     method: "POST",
     mode: "no-cors",
@@ -142,13 +175,10 @@ TOKEN : ${token}
 
 ------------------------------------
 
-📸 Take a screenshot of this page
-and send it to our Telegram Bot:
+📸 Take a screenshot and send it to
 
 @Technology_SR_Bot
 
-OR paste this in your browser:
-t.me/Technology_SR_Bot
-
 ====================================`
-);
+  );
+}
