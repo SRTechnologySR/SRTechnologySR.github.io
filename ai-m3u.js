@@ -1,7 +1,7 @@
 /* ===============================
    CONFIG
 ================================ */
-const M3U_URL = "./index.m3u";
+const M3U_URL = "index.m3u";
 
 /* GOOGLE FORM */
 const GOOGLE_FORM_URL =
